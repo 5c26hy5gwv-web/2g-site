@@ -1,0 +1,2156 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>2年 学年サイト DEMO</title>
+<meta name="description" content="静岡大学教育学部附属静岡中学校 2年（A/B/C/D組）の学年サイト。学年の予定・テスト範囲・各クラスの目標・委員会連絡・アンケートがひとつにまとまっています。" />
+
+<!-- ============================================================
+     🛠 更新する人へ / How to update
+     ------------------------------------------------------------
+     このサイトの内容は、ほぼ全部この <script id="site-data"> の
+     中の JSON を書き換えるだけで更新できます。
+     HTML の他の部分は基本さわらなくてOKです。
+
+     ★2Gサイト用 JSON構造メモ★
+     ・meta        … サイト名・学年・バージョン
+     ・classes     … A/B/C/D 各クラスの情報（担任・カラー等）
+     ・today       … 学年共通の一日情報
+       └ perClass  … クラス別の時間割・清掃（A/B/C/D）
+     ・thisWeek    … 今週の要点（学年共通）
+     ・deadlines   … 直近の締切（target: "all" or "A" or "A,B" などクラス指定可）
+     ・events      … 行事カウントダウン（体育祭・合唱コンなど）
+     ・upcoming    … 今後の予定
+     ・tests       … テスト範囲（教科ごと・4クラス分まとめ）
+     ・goals       … 各クラスの目標カレンダー（A/B/C/D）
+     ・committees  … 係・委員会 連絡板
+     ・surveys     … アンケート（Googleフォーム連携）
+     ・faqs        … FAQ
+     ・forms       … 意見箱・質問フォーム（クラス別）・新機能募集
+     ・others      … その他リンク
+     ・updates     … 更新履歴
+     ・policy      … サイトポリシー
+     ============================================================ -->
+<script type="application/json" id="site-data">
+{
+  "meta": {
+    "siteName": "2年 学年サイト DEMO",
+    "siteNameSub": "静岡大学教育学部附属静岡中学校 2年",
+    "schoolName": "静岡大学教育学部附属静岡中学校",
+    "grade": "2年",
+    "version": "",
+    "updatedAt": ""
+  },
+  "classes": [
+    { "id": "A", "name": "A組", "color": "#e5484d", "colorSoft": "#fdecec", "colorInk": "#a01e22", "teacher": "" },
+    { "id": "B", "name": "B組", "color": "#2f6fed", "colorSoft": "#eaf1fe", "colorInk": "#1e46a3", "teacher": "" },
+    { "id": "C", "name": "C組", "color": "#e8a400", "colorSoft": "#fdf4dd", "colorInk": "#8a5f00", "teacher": "" },
+    { "id": "D", "name": "D組", "color": "#2f9e5c", "colorSoft": "#e6f5ec", "colorInk": "#1e7a44", "teacher": "" }
+  ],
+  "today": {
+    "note": "夏休み中は時間割はお休みモードです。8月27日に更新します。",
+    "dismissalTime": "—",
+    "perClass": {
+      "A": {
+        "period": [
+          {"n":1,"subject":"—"},{"n":2,"subject":"—"},{"n":3,"subject":"—"},
+          {"n":4,"subject":"—"},{"n":5,"subject":"—"},{"n":6,"subject":"—"}
+        ],
+        "cleaning": "—"
+      },
+      "B": {
+        "period": [
+          {"n":1,"subject":"—"},{"n":2,"subject":"—"},{"n":3,"subject":"—"},
+          {"n":4,"subject":"—"},{"n":5,"subject":"—"},{"n":6,"subject":"—"}
+        ],
+        "cleaning": "—"
+      },
+      "C": {
+        "period": [
+          {"n":1,"subject":"—"},{"n":2,"subject":"—"},{"n":3,"subject":"—"},
+          {"n":4,"subject":"—"},{"n":5,"subject":"—"},{"n":6,"subject":"—"}
+        ],
+        "cleaning": "—"
+      },
+      "D": {
+        "period": [
+          {"n":1,"subject":"—"},{"n":2,"subject":"—"},{"n":3,"subject":"—"},
+          {"n":4,"subject":"—"},{"n":5,"subject":"—"},{"n":6,"subject":"—"}
+        ],
+        "cleaning": "—"
+      }
+    }
+  },
+  "thisWeek": {
+    "range": "9/7(月)〜9/13(日)",
+    "highlights": [
+      "体育祭準備期間開始。企画も本格始動？"
+    ]
+  },
+  "deadlines": [
+    {
+      "date": "2026-08-26",
+      "title": "美術 課題",
+      "note": "「この夏見つけた美しいもの」",
+      "target": "all"
+    }
+  ],
+  "events": [
+    {
+      "date": "2026-09-30",
+      "title": "体育祭",
+      "icon": "🏃",
+      "target": "all"
+    },
+    { "placeholder": true },
+    { "placeholder": true }
+  ],
+  "upcoming": [
+    { "date": "9/30(水)", "title": "体育祭", "target": "all" }
+  ],
+  "tests": {
+    "name": "前期末テスト範囲",
+    "period": "2026/8/28(金)",
+    "subjects": [
+      {
+        "subject": "国語",
+        "teacher": "井上先生",
+        "range": "漢字の書き（小1〜小6）、漢字の読み（小1〜中2）、文学的文章、説明的文章、詩、文法（品詞の分類まで）、条件作文",
+        "tip": "身の回りの本や文章をたくさん読む",
+        "perClass": {}
+      },
+      {
+        "subject": "数学",
+        "teacher": "斎藤先生、西谷先生",
+        "range": "空間図形〜連立方程式＋実力問題",
+        "tip": "「なぜそうなるのか」を説明できるように",
+        "perClass": {}
+      },
+      {
+        "subject": "英語",
+        "teacher": "小野先生",
+        "range": "中1の全範囲、Unit1〜Unit4、授業内で学習した全内容、授業で取り組んだドリルプリント",
+        "tip": "授業の内容やプリントをよく復習",
+        "perClass": {}
+      },
+      {
+        "subject": "理科",
+        "teacher": "不明",
+        "range": "地学分野すべて、化学分野すべて、実力問題",
+        "tip": "計算問題の練習をしておく",
+        "perClass": {}
+      },
+      {
+        "subject": "社会",
+        "teacher": "菅原先生、井村先生",
+        "range": "歴史:大航海時代〜江戸時代（江戸幕府の成立とその外交政策まで） / 地理:北アメリカ州〜九州地方",
+        "tip": "文章で説明できるように",
+        "perClass": {}
+      }
+    ]
+  },
+  "goals": {
+    "monthLabel": "",
+    "byClass": {}
+  },
+  "committees": [],
+  "surveys": [],
+  "faqs": [
+    {
+      "category": "サイト",
+      "q": "この学年サイトはClassroomと何が違う？",
+      "a": "Classroomは連絡・課題配布用。このサイトは『今日/今週の予定』『テスト範囲』『みんなの質問と答え』『意見・要望を送る場所』を学年（A/B/C/D組）でまとめた場所です。"
+    },
+    {
+      "category": "サイト",
+      "q": "自分のクラスを設定できる？",
+      "a": "右下の歯車マーク（表示設定）から「自分のクラス」を選ぶと、開いた時に最初にそのクラスが表示されます。この端末にだけ保存されます。"
+    },
+    {
+      "category": "サイト",
+      "q": "スマホでも見られる？",
+      "a": "はい。下のタブから予定・テスト・FAQ・送るにすぐ移動できます。スマホ最優先で作っています。"
+    },
+    {
+      "category": "予定",
+      "q": "他のクラスの時間割も見られる？",
+      "a": "見られます。ヒーロー（一番上）のA/B/C/Dタブで切り替えてください。"
+    },
+    {
+      "category": "テスト",
+      "q": "教科がまだ『不明』のところがある",
+      "a": "情報待ちです。分かり次第このサイトに載せます。"
+    },
+    {
+      "category": "その他",
+      "q": "サイトを直したい / 機能追加してほしい",
+      "a": "『送る → 新機能募集』からアイデアを送ってください。検討して、次のバージョンで反映します。"
+    }
+  ],
+  "forms": {
+    "opinion": {
+      "title": "意見箱",
+      "when": "サイトや学年への意見・要望を伝えたいとき",
+      "url": "https://docs.google.com/forms/d/e/1FAIpQLSd5qkBAPiNX7OYXFAxGBEELP4qEMGAw58c2ybAV6kwWkO5htA/viewform?usp=header"
+    },
+    "question": {
+      "title": "質問フォーム",
+      "when": "分からないこと・確認したいことを聞きたいとき（回答はFAQに載ります）",
+      "byClass": {
+        "A": "https://docs.google.com/forms/d/e/1FAIpQLSdNvyGR-xDc3Wj-JMW2fgsPdXv9-6yhcHymdujjnK2Pu2iBCw/viewform?usp=header",
+        "B": "https://docs.google.com/forms/d/e/1FAIpQLSdNvyGR-xDc3Wj-JMW2fgsPdXv9-6yhcHymdujjnK2Pu2iBCw/viewform?usp=header",
+        "C": "https://docs.google.com/forms/d/e/1FAIpQLSdNvyGR-xDc3Wj-JMW2fgsPdXv9-6yhcHymdujjnK2Pu2iBCw/viewform?usp=header",
+        "D": "https://docs.google.com/forms/d/e/1FAIpQLSdNvyGR-xDc3Wj-JMW2fgsPdXv9-6yhcHymdujjnK2Pu2iBCw/viewform?usp=header"
+      }
+    },
+    "feature": {
+      "title": "新機能募集",
+      "when": "サイトに欲しい機能・改善アイデアを送りたいとき",
+      "url": "https://docs.google.com/forms/d/e/1FAIpQLScpDxm3ZAMroNrju-CbonK2S0lH0-hEsSvYQ2RzTn7W8grFTw/viewform?usp=header"
+    }
+  },
+  "others": [
+    {
+      "title": "選挙管理委員会ポータル",
+      "desc": "coming soon",
+      "url": "#",
+      "disabled": true
+    },
+    {
+      "title": "サイトポリシー",
+      "desc": "このサイトの使い方・書き込みルール",
+      "url": "#site-policy"
+    }
+  ],
+  "policy": [
+    "このサイトは 2年 学年サイト（DEMO） です。掲載情報は運営メンバーが管理しています。",
+    "個人が特定される情報（フルネーム・住所・電話番号など）は書き込まない・送らないでください。",
+    "誹謗中傷や、他人を傷つける内容の書き込みは削除します。",
+    "サイトの内容は予告なく変更・更新することがあります。最新版は上部のバージョン表記を確認してください。",
+    "困ったこと・問題を見つけたら『意見箱』から運営メンバーに連絡してください。"
+  ],
+  "updates": []
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  /* 学年ニュートラル（2Bサイトからのトーン継承） */
+  --accent: #2f6fed;
+  --accent-soft: #eaf1fe;
+  --accent-ink: #1e46a3;
+  --bg: #f6f7fb;
+  --surface: #ffffff;
+  --ink: #14161c;
+  --ink-2: #4a5163;
+  --ink-3: #8b93a6;
+  --line: #e8ebf2;
+  --line-2: #eef0f6;
+  --danger: #d94b5a;
+  --warn: #d98a2b;
+  --ok: #3a9b6d;
+  --radius: 16px;
+  --radius-sm: 10px;
+  --shadow-sm: 0 1px 2px rgba(20,22,28,.04), 0 1px 1px rgba(20,22,28,.03);
+  --shadow-md: 0 6px 20px rgba(20,22,28,.06), 0 2px 6px rgba(20,22,28,.04);
+  --font-sans: "Noto Sans JP", system-ui, -apple-system, "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+  --font-display: "Zen Kaku Gothic New", "Noto Sans JP", system-ui, sans-serif;
+  --maxw: 780px;
+
+  /* クラスカラー（JSからも上書きされる） */
+  --cls-A: #e5484d; --cls-A-soft: #fdecec; --cls-A-ink: #a01e22;
+  --cls-B: #2f6fed; --cls-B-soft: #eaf1fe; --cls-B-ink: #1e46a3;
+  --cls-C: #e8a400; --cls-C-soft: #fdf4dd; --cls-C-ink: #8a5f00;
+  --cls-D: #2f9e5c; --cls-D-soft: #e6f5ec; --cls-D-ink: #1e7a44;
+
+  /* 現在選択中クラス（JSで --cls-A などに切替） */
+  --cur: var(--cls-B);
+  --cur-soft: var(--cls-B-soft);
+  --cur-ink: var(--cls-B-ink);
+}
+[data-theme="dark"] {
+  --bg: #0f1116;
+  --surface: #171922;
+  --ink: #eef0f5;
+  --ink-2: #b7bccb;
+  --ink-3: #7a8095;
+  --line: #262a36;
+  --line-2: #1e2129;
+  --accent-soft: #1a2a4e;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.4);
+  --shadow-md: 0 8px 24px rgba(0,0,0,.5);
+  --cls-A-soft: #3a1c1e; --cls-A-ink: #ff9195;
+  --cls-B-soft: #172443; --cls-B-ink: #86adff;
+  --cls-C-soft: #3a2d0a; --cls-C-ink: #f4c95a;
+  --cls-D-soft: #14352a; --cls-D-ink: #7fd4a6;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--font-sans);
+  color: var(--ink);
+  background: var(--bg);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  padding-bottom: calc(78px + env(safe-area-inset-bottom));
+}
+a { color: var(--accent-ink); text-decoration: none; }
+button { font-family: inherit; }
+
+/* --------- App shell --------- */
+.app-header {
+  position: sticky; top: 0; z-index: 40;
+  background: color-mix(in oklab, var(--bg) 88%, transparent);
+  backdrop-filter: saturate(160%) blur(12px);
+  -webkit-backdrop-filter: saturate(160%) blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+.app-header-inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 12px 18px;
+  display: flex; align-items: center; gap: 12px;
+}
+.brand {
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 18px;
+  letter-spacing: .02em;
+}
+.brand-mark {
+  width: 36px; height: 36px; border-radius: 10px;
+  color: #fff;
+  display: grid; place-items: center;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 14px;
+  letter-spacing: 0;
+  overflow: hidden;
+  position: relative;
+  background:
+    linear-gradient(135deg, var(--cls-A) 0 25%, var(--cls-B) 25% 50%, var(--cls-C) 50% 75%, var(--cls-D) 75% 100%);
+  box-shadow: 0 4px 12px rgba(20,22,28,.15);
+}
+.brand-mark span {
+  position: relative; z-index: 1;
+  text-shadow: 0 1px 2px rgba(0,0,0,.35);
+}
+.brand-sub { color: var(--ink-3); font-size: 11px; font-weight: 500; margin-top: 1px; }
+.brand-text { display: flex; flex-direction: column; line-height: 1.15; }
+
+.ver-tag {
+  margin-left: auto;
+  font-size: 11px; color: var(--ink-3);
+  padding: 4px 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+}
+
+.search-wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 18px 12px; }
+.search {
+  width: 100%;
+  height: 42px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  padding: 0 14px 0 40px;
+  font-size: 14px;
+  color: var(--ink);
+  font-family: inherit;
+  box-shadow: var(--shadow-sm);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%238b93a6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='7'/><path d='m20 20-3.5-3.5'/></svg>");
+  background-repeat: no-repeat;
+  background-position: 14px center;
+}
+.search:focus { outline: 2px solid color-mix(in oklab, var(--accent) 30%, transparent); outline-offset: 1px; border-color: var(--accent); }
+
+main { max-width: var(--maxw); margin: 0 auto; padding: 8px 18px 32px; }
+
+/* --------- Sections --------- */
+section { scroll-margin-top: 84px; }
+.section-head {
+  display: flex; align-items: baseline; gap: 10px;
+  margin: 28px 0 12px;
+}
+.section-head h2 {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 20px;
+  margin: 0;
+  letter-spacing: .01em;
+}
+.section-head .hint { color: var(--ink-3); font-size: 12px; }
+.section-head .rule {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, var(--line), transparent);
+}
+
+/* --------- Card --------- */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: var(--shadow-sm);
+}
+.card + .card { margin-top: 12px; }
+.card h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  margin: 0 0 10px;
+  display: flex; align-items: center; gap: 8px;
+}
+.card .can-do {
+  font-size: 12px;
+  color: var(--ink-3);
+  margin: -4px 0 12px;
+}
+
+/* --------- Class Tabs (Hero上) --------- */
+.class-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.class-tab {
+  border: 2px solid transparent;
+  background: var(--surface);
+  padding: 10px 4px 8px;
+  border-radius: 12px;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 15px;
+  color: var(--ink-2);
+  cursor: pointer;
+  transition: transform .12s ease, box-shadow .15s ease, border-color .15s ease;
+  box-shadow: var(--shadow-sm);
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  position: relative;
+  overflow: hidden;
+}
+.class-tab .cls-dot {
+  width: 22px; height: 22px; border-radius: 999px;
+  display: grid; place-items: center;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 900;
+  font-family: var(--font-display);
+  box-shadow: 0 2px 6px rgba(0,0,0,.15);
+}
+.class-tab .cls-label {
+  font-size: 11px; color: var(--ink-3); font-weight: 500;
+  letter-spacing: .02em;
+}
+.class-tab[data-cls="A"] .cls-dot { background: var(--cls-A); }
+.class-tab[data-cls="B"] .cls-dot { background: var(--cls-B); }
+.class-tab[data-cls="C"] .cls-dot { background: var(--cls-C); }
+.class-tab[data-cls="D"] .cls-dot { background: var(--cls-D); }
+.class-tab[aria-selected="true"] {
+  border-color: var(--cur);
+  transform: translateY(-1px);
+  background: var(--cur-soft);
+  color: var(--cur-ink);
+}
+.class-tab[aria-selected="true"] .cls-label { color: var(--cur-ink); opacity: .9; }
+.my-badge {
+  position: absolute;
+  top: 4px; right: 4px;
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--ink-3);
+  padding: 1px 5px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  letter-spacing: .04em;
+}
+
+/* --------- Hero: Today --------- */
+.hero {
+  background: linear-gradient(180deg, var(--cur) 0%, color-mix(in oklab, var(--cur) 72%, #0a1a3a) 100%);
+  color: #fff;
+  border-radius: 20px;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 30px color-mix(in oklab, var(--cur) 30%, transparent);
+  transition: background .4s ease, box-shadow .4s ease;
+}
+.hero::after {
+  content: "";
+  position: absolute; inset: auto -40px -60px auto;
+  width: 220px; height: 220px;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.25), transparent 60%);
+  filter: blur(2px);
+  pointer-events: none;
+}
+.hero-date {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px;
+  opacity: .9;
+  letter-spacing: .04em;
+}
+.hero-date .dot { width: 6px; height: 6px; border-radius: 999px; background: #fff; opacity: .8;}
+.hero-class-tag {
+  margin-left: auto;
+  background: rgba(255,255,255,.18);
+  border: 1px solid rgba(255,255,255,.28);
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .04em;
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 26px;
+  margin: 6px 0 2px;
+  letter-spacing: .01em;
+}
+.hero-note {
+  font-size: 13px; opacity: .95; margin: 8px 0 14px;
+  padding: 10px 12px;
+  background: rgba(255,255,255,.14);
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.18);
+}
+.periods {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 6px;
+}
+.period {
+  background: rgba(255,255,255,.15);
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 10px;
+  padding: 8px 4px;
+  text-align: center;
+  min-height: 62px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.period .n { font-size: 10px; opacity: .75; }
+.period .sub { font-weight: 700; font-size: 13px; margin-top: 2px; }
+.hero-lists {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px;
+}
+.hero-list {
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 12px;
+  padding: 10px 12px;
+  min-height: 64px;
+}
+.hero-list h4 {
+  margin: 0 0 6px; font-size: 11px; opacity: .8; font-weight: 500;
+  letter-spacing: .06em; text-transform: uppercase;
+}
+.hero-list .val { font-size: 14px; font-weight: 700; }
+.hero-list .empty { font-size: 12px; opacity: .7; }
+
+/* --------- Countdown --------- */
+.countdowns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.cd {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 12px 10px;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+.cd .cd-icon { font-size: 22px; line-height: 1; }
+.cd .cd-title { font-size: 12px; color: var(--ink-2); margin-top: 4px; font-weight: 700; }
+.cd .cd-days {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 26px;
+  line-height: 1;
+  margin-top: 6px;
+  color: var(--accent-ink);
+}
+.cd .cd-unit { font-size: 10px; color: var(--ink-3); letter-spacing: .04em; margin-top: 2px; }
+.cd .cd-date { font-size: 10px; color: var(--ink-3); margin-top: 4px; }
+.cd.is-past { opacity: .55; }
+.cd.is-past .cd-days { color: var(--ink-3); font-size: 14px; }
+.cd.is-next {
+  border-color: color-mix(in oklab, var(--accent) 45%, var(--line));
+  background: linear-gradient(180deg, var(--accent-soft), var(--surface));
+}
+.cd.is-next .cd-days { color: var(--accent); }
+@media (max-width: 520px) {
+  .countdowns { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .cd { padding: 10px 6px; }
+  .cd .cd-days { font-size: 22px; }
+}
+
+/* --------- Deadlines --------- */
+.deadlines { display: flex; flex-direction: column; gap: 10px; }
+.deadline {
+  display: flex; align-items: center; gap: 14px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface);
+}
+.deadline .days {
+  min-width: 56px;
+  text-align: center;
+  font-family: var(--font-display);
+  font-weight: 900;
+  line-height: 1;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+}
+.deadline .days .num { font-size: 22px; }
+.deadline .days .unit { font-size: 10px; display: block; margin-top: 2px; opacity: .8; letter-spacing: .04em; }
+.deadline.warn .days { background: #fdecd6; color: #8a4a10; }
+.deadline.hot .days { background: #fbe1e4; color: #9b1e2c; }
+.deadline .info { flex: 1; min-width: 0; }
+.deadline .title { font-weight: 700; }
+.deadline .meta { font-size: 12px; color: var(--ink-3); margin-top: 2px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+
+/* target chip */
+.target-chip {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink-3);
+}
+.target-chip[data-t="all"] { color: var(--ink-2); }
+.target-chip[data-t="A"] { color: var(--cls-A-ink); background: var(--cls-A-soft); border-color: transparent; }
+.target-chip[data-t="B"] { color: var(--cls-B-ink); background: var(--cls-B-soft); border-color: transparent; }
+.target-chip[data-t="C"] { color: var(--cls-C-ink); background: var(--cls-C-soft); border-color: transparent; }
+.target-chip[data-t="D"] { color: var(--cls-D-ink); background: var(--cls-D-soft); border-color: transparent; }
+
+/* --------- Week --------- */
+.week {
+  display: grid; gap: 8px;
+}
+.week-range {
+  font-size: 12px; color: var(--ink-3); letter-spacing: .04em;
+}
+.week ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
+.week li {
+  display: flex; gap: 10px; align-items: flex-start;
+  padding: 8px 10px; background: var(--line-2); border-radius: 10px;
+  font-size: 14px;
+}
+.week li::before {
+  content: ""; width: 6px; height: 6px; border-radius: 999px;
+  background: var(--accent); margin-top: 9px; flex-shrink: 0;
+}
+
+/* --------- Quick actions --------- */
+.quick {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-top: 6px;
+}
+.quick a {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  padding: 14px 6px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+  min-height: 72px;
+  justify-content: center;
+}
+.quick a:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); border-color: color-mix(in oklab, var(--accent) 40%, var(--line)); }
+.quick .ico {
+  width: 30px; height: 30px; display: grid; place-items: center;
+  border-radius: 9px; background: var(--accent-soft); color: var(--accent-ink);
+}
+.quick .ico svg { width: 18px; height: 18px; }
+
+/* --------- Upcoming list --------- */
+.upcoming-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.upcoming-list li {
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+  display: grid; grid-template-columns: 110px 1fr; gap: 12px; align-items: center;
+}
+.upcoming-list .date { color: var(--accent-ink); font-weight: 700; font-size: 13px; margin: 0; }
+.upcoming-list .row-r { display: flex; align-items: center; gap: 8px; }
+@media (max-width: 520px) {
+  .upcoming-list li { grid-template-columns: 96px 1fr; }
+}
+
+/* --------- Tests --------- */
+.test-period {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 12px; color: var(--accent-ink);
+  background: var(--accent-soft);
+  padding: 6px 10px; border-radius: 999px;
+  margin-bottom: 12px;
+}
+.subjects { display: grid; gap: 8px; }
+details.subject {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+  overflow: hidden;
+}
+details.subject summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 12px 14px;
+  display: flex; align-items: center; gap: 10px;
+  font-weight: 700;
+}
+details.subject summary::-webkit-details-marker { display: none; }
+details.subject summary::after {
+  content: "";
+  width: 10px; height: 10px;
+  border-right: 2px solid var(--ink-3);
+  border-bottom: 2px solid var(--ink-3);
+  transform: rotate(45deg);
+  margin-left: auto;
+  transition: transform .2s;
+}
+details.subject[open] summary::after { transform: rotate(-135deg); }
+details.subject .body {
+  padding: 4px 14px 14px;
+  border-top: 1px solid var(--line-2);
+  font-size: 14px;
+  color: var(--ink-2);
+}
+details.subject .tip {
+  margin-top: 10px;
+  padding: 8px 10px;
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+  border-radius: 8px;
+  font-size: 13px;
+}
+details.subject .perclass-title { margin-top: 12px; font-size: 12px; color: var(--ink-3); font-weight: 700; letter-spacing: .04em; }
+details.subject .perclass { display: grid; gap: 4px; margin-top: 4px; }
+details.subject .perclass .row {
+  display: grid; grid-template-columns: 36px 1fr; gap: 8px; align-items: baseline;
+  padding: 6px 8px; background: var(--line-2); border-radius: 8px;
+  font-size: 13px;
+}
+details.subject .perclass .row .c {
+  font-family: var(--font-display); font-weight: 900; text-align: center;
+  border-radius: 6px; padding: 1px 0; color: #fff;
+}
+.perclass .row .c[data-c="A"] { background: var(--cls-A); }
+.perclass .row .c[data-c="B"] { background: var(--cls-B); }
+.perclass .row .c[data-c="C"] { background: var(--cls-C); }
+.perclass .row .c[data-c="D"] { background: var(--cls-D); }
+.subject-chip {
+  width: 32px; height: 32px;
+  border-radius: 9px;
+  display: grid; place-items: center;
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.subject-chip[data-c="国語"] { background: #fde7e7; color: #9b2c2c; }
+.subject-chip[data-c="数学"] { background: #e0efff; color: #1e46a3; }
+.subject-chip[data-c="英語"] { background: #fff2d6; color: #8a5a10; }
+.subject-chip[data-c="理科"] { background: #dff3e4; color: #1f6d43; }
+.subject-chip[data-c="社会"] { background: #f2e6ff; color: #5a2ca0; }
+.subject-chip[data-c="保体"] { background: #ffe4ec; color: #a02454; }
+.subject-chip[data-c="技家"] { background: #fbeddc; color: #8a4a10; }
+.subject-chip[data-c="音楽"] { background: #e1f0f5; color: #1a5a75; }
+
+/* --------- Goals (per class) --------- */
+.goals-head { font-size: 12px; color: var(--ink-3); margin-bottom: 10px; }
+.goals-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+.goal-card {
+  border-radius: 12px;
+  padding: 12px;
+  border: 1px solid transparent;
+  background: var(--surface);
+  position: relative;
+  min-height: 96px;
+}
+.goal-card[data-c="A"] { background: var(--cls-A-soft); }
+.goal-card[data-c="B"] { background: var(--cls-B-soft); }
+.goal-card[data-c="C"] { background: var(--cls-C-soft); }
+.goal-card[data-c="D"] { background: var(--cls-D-soft); }
+.goal-card .cls-head {
+  display: flex; align-items: center; gap: 6px;
+  font-family: var(--font-display); font-weight: 900; font-size: 13px;
+  margin-bottom: 6px;
+}
+.goal-card .cls-badge {
+  width: 20px; height: 20px; border-radius: 6px;
+  color: #fff; display: grid; place-items: center;
+  font-size: 11px;
+}
+.goal-card[data-c="A"] .cls-head { color: var(--cls-A-ink); }
+.goal-card[data-c="B"] .cls-head { color: var(--cls-B-ink); }
+.goal-card[data-c="C"] .cls-head { color: var(--cls-C-ink); }
+.goal-card[data-c="D"] .cls-head { color: var(--cls-D-ink); }
+.goal-card[data-c="A"] .cls-badge { background: var(--cls-A); }
+.goal-card[data-c="B"] .cls-badge { background: var(--cls-B); }
+.goal-card[data-c="C"] .cls-badge { background: var(--cls-C); }
+.goal-card[data-c="D"] .cls-badge { background: var(--cls-D); }
+.goal-card .goal-text { font-size: 14px; font-weight: 700; color: var(--ink); }
+.goal-card .goal-note { font-size: 12px; color: var(--ink-2); margin-top: 4px; }
+.goal-card.is-mine::after {
+  content: "自分のクラス";
+  position: absolute; top: 8px; right: 8px;
+  font-size: 9px; font-weight: 700; letter-spacing: .04em;
+  color: var(--ink-2); background: var(--surface);
+  padding: 2px 6px; border-radius: 999px;
+  border: 1px solid var(--line);
+}
+
+/* --------- Coming soon placeholder --------- */
+.coming-soon {
+  border: 1px dashed var(--line);
+  border-radius: 12px;
+  background: var(--line-2);
+  color: var(--ink-3);
+  padding: 22px 16px;
+  text-align: center;
+  font-size: 13px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: .04em;
+}
+.coming-soon .cs-emoji { font-size: 22px; display: block; margin-bottom: 6px; opacity: .7; }
+.coming-soon .cs-sub { display: block; margin-top: 4px; font-size: 11px; font-weight: 500; color: var(--ink-3); letter-spacing: 0; }
+/* countdown placeholder card variant */
+.cd.is-empty {
+  border-style: dashed;
+  background: var(--line-2);
+  color: var(--ink-3);
+}
+.cd.is-empty .cd-icon { opacity: .5; }
+.cd.is-empty .cd-days { color: var(--ink-3); font-size: 20px; }
+.cd.is-empty .cd-title { color: var(--ink-3); }
+
+/* --------- Committees --------- */
+.comm-list { display: grid; gap: 8px; }
+.comm-item {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+  padding: 12px 14px;
+  display: grid; gap: 4px;
+}
+.comm-head { display: flex; align-items: center; gap: 8px; }
+.comm-name { font-family: var(--font-display); font-weight: 700; font-size: 14px; }
+.comm-msg { font-size: 13px; color: var(--ink-2); }
+.comm-meta { font-size: 11px; color: var(--ink-3); }
+
+/* --------- Surveys --------- */
+.survey-list { display: grid; gap: 8px; }
+.survey-item {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+  padding: 14px;
+  display: grid; gap: 6px;
+  color: var(--ink);
+}
+.survey-item .row-1 { display: flex; align-items: center; gap: 8px; }
+.survey-item .title { font-weight: 700; font-size: 14px; }
+.survey-item .meta { font-size: 11px; color: var(--ink-3); display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.survey-item .btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 12px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  align-self: start;
+  margin-top: 4px;
+}
+.survey-item .btn.btn-ghost {
+  background: var(--surface); color: var(--accent-ink);
+  border: 1px solid var(--accent);
+}
+.survey-item.is-closed { opacity: .7; }
+.survey-item.is-closed .btn { background: var(--ink-3); pointer-events: none; }
+
+/* --------- FAQ --------- */
+.faq-cats {
+  display: flex; gap: 6px; overflow-x: auto; margin: -4px 0 12px;
+  padding: 4px 0;
+}
+.faq-cats button {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink-2);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.faq-cats button[aria-pressed="true"] {
+  background: var(--ink); color: var(--surface); border-color: var(--ink);
+}
+.faqs { display: grid; gap: 8px; }
+details.faq {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+}
+details.faq summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 12px 14px;
+  display: flex; gap: 10px; align-items: flex-start;
+  font-weight: 700;
+  font-size: 14px;
+}
+details.faq summary::-webkit-details-marker { display: none; }
+details.faq summary::before {
+  content: "Q";
+  color: var(--accent-ink);
+  background: var(--accent-soft);
+  border-radius: 6px;
+  padding: 1px 7px;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 12px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+details.faq .a {
+  padding: 4px 14px 14px 40px;
+  color: var(--ink-2);
+  font-size: 14px;
+  border-top: 1px solid var(--line-2);
+}
+details.faq .a::before {
+  content: "A ";
+  color: var(--ok);
+  font-family: var(--font-display);
+  font-weight: 900;
+  margin-right: 4px;
+}
+.faq-empty { padding: 20px; text-align: center; color: var(--ink-3); font-size: 13px; }
+
+/* --------- Forms (send to) --------- */
+.forms-grid {
+  display: grid; gap: 10px;
+  grid-template-columns: 1fr;
+}
+.form-card {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 16px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  color: var(--ink);
+  transition: transform .15s ease, border-color .15s ease;
+}
+.form-card:hover { transform: translateY(-1px); border-color: color-mix(in oklab, var(--accent) 40%, var(--line)); }
+.form-card .icon {
+  width: 44px; height: 44px; border-radius: 12px;
+  display: grid; place-items: center;
+  flex-shrink: 0;
+}
+.form-card .icon svg { width: 22px; height: 22px; }
+.form-card[data-kind="opinion"] .icon { background: #fbe1e4; color: #9b1e2c; }
+.form-card[data-kind="question"] .icon { background: #e0efff; color: #1e46a3; }
+.form-card[data-kind="feature"] .icon { background: #dff3e4; color: #1f6d43; }
+.form-card .body { flex: 1; min-width: 0; }
+.form-card .title { font-family: var(--font-display); font-weight: 700; font-size: 16px; margin: 0; }
+.form-card .when { font-size: 12px; color: var(--ink-3); margin-top: 4px; }
+.form-card .cls-note {
+  font-size: 11px;
+  color: var(--cur-ink);
+  background: var(--cur-soft);
+  padding: 2px 8px;
+  border-radius: 999px;
+  display: inline-block;
+  margin-top: 6px;
+  font-weight: 700;
+}
+.form-card .arrow { color: var(--ink-3); margin-left: auto; align-self: center; }
+
+/* --------- Others --------- */
+.others-list { display: grid; gap: 8px; }
+.others-list a,
+.others-list div.is-disabled {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  color: var(--ink);
+  text-decoration: none;
+}
+.others-list .is-disabled {
+  opacity: .6;
+  cursor: default;
+  pointer-events: none;
+}
+.others-list .title { font-weight: 700; font-size: 14px; }
+.others-list .desc { font-size: 12px; color: var(--ink-3); margin-top: 2px; }
+.others-list .arrow { margin-left: auto; color: var(--ink-3); }
+
+/* --------- Updates --------- */
+.updates { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.updates li {
+  padding: 12px 14px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  font-size: 14px;
+}
+.updates .meta {
+  font-size: 11px; color: var(--ink-3);
+  display: flex; gap: 8px; align-items: center; margin-bottom: 4px;
+}
+.updates .ver {
+  color: var(--accent-ink); background: var(--accent-soft);
+  padding: 1px 6px; border-radius: 6px; font-weight: 700;
+  font-size: 10px; letter-spacing: .02em;
+}
+
+/* --------- Policy --------- */
+.policy-list { padding-left: 20px; margin: 0; color: var(--ink-2); font-size: 13px; }
+.policy-list li { padding: 4px 0; }
+
+/* --------- Footer --------- */
+footer {
+  max-width: var(--maxw);
+  margin: 32px auto 0;
+  padding: 24px 18px 32px;
+  color: var(--ink-3);
+  font-size: 12px;
+  text-align: center;
+  border-top: 1px solid var(--line);
+}
+
+/* --------- Bottom tab bar (mobile) --------- */
+.tabbar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 50;
+  background: color-mix(in oklab, var(--surface) 96%, transparent);
+  backdrop-filter: saturate(180%) blur(14px);
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+  border-top: 1px solid var(--line);
+  padding: 6px 0 calc(6px + env(safe-area-inset-bottom));
+}
+.tabbar-inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2px;
+  padding: 0 8px;
+}
+.tabbar a {
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  padding: 6px 4px;
+  color: var(--ink-3);
+  font-size: 10.5px;
+  font-weight: 700;
+  border-radius: 8px;
+}
+.tabbar a svg { width: 22px; height: 22px; }
+.tabbar a.active { color: var(--cur); }
+.tabbar a:active { background: var(--line-2); }
+
+/* --------- Tweaks button --------- */
+.tweaks-btn {
+  position: fixed;
+  right: 14px;
+  bottom: calc(78px + env(safe-area-inset-bottom) + 8px);
+  z-index: 45;
+  width: 44px; height: 44px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-md);
+  display: grid; place-items: center;
+  color: var(--ink-2);
+  cursor: pointer;
+}
+.tweaks-btn:hover { color: var(--ink); }
+
+/* --------- Utilities --------- */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 520px) {
+  .two-col { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 22px; }
+  .goals-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 720px) {
+  .forms-grid { grid-template-columns: 1fr 1fr 1fr; }
+  .quick { grid-template-columns: repeat(4, 1fr); max-width: 520px; }
+  .goals-grid { grid-template-columns: repeat(4, 1fr); }
+  body { padding-bottom: 40px; }
+  .tabbar { display: none; }
+  .tweaks-btn { bottom: 20px; }
+}
+
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+:target > .section-head h2 { color: var(--accent); transition: color .3s; }
+</style>
+</head>
+<body data-theme="light">
+
+<!-- ===================== Header ===================== -->
+<header class="app-header" data-screen-label="Header">
+  <div class="app-header-inner">
+    <div class="brand">
+      <div class="brand-mark"><span>2</span></div>
+      <div class="brand-text">
+        <span id="site-title">2年 学年サイト</span>
+        <span class="brand-sub" id="school-name">静岡大学教育学部附属静岡中学校 2年</span>
+      </div>
+    </div>
+    <span class="ver-tag" id="ver-tag">DEMO</span>
+  </div>
+  <div class="search-wrap">
+    <input class="search" id="global-search" type="search" placeholder="サイト内を検索（例:テスト範囲、意見箱、体育祭）" aria-label="サイト内検索" />
+  </div>
+</header>
+
+<main>
+
+  <!-- ===================== Class Tabs ===================== -->
+  <div class="class-tabs" id="class-tabs" role="tablist" aria-label="クラス切替">
+    <!-- 動的生成 -->
+  </div>
+
+  <!-- ===================== Hero: Today ===================== -->
+  <section id="today" data-screen-label="01 今日">
+    <div class="hero">
+      <div class="hero-date">
+        <span class="dot"></span>
+        <span id="today-label">今日</span>
+        <span class="hero-class-tag" id="hero-class-tag">2年 —組</span>
+      </div>
+      <h1 id="today-heading">…</h1>
+      <div class="hero-note" id="today-note">読み込み中…</div>
+
+      <div class="periods" id="periods"></div>
+
+      <div class="hero-lists">
+        <div class="hero-list">
+          <h4>清掃</h4>
+          <div class="val" id="today-cleaning">—</div>
+        </div>
+        <div class="hero-list">
+          <h4>完全下校</h4>
+          <div class="val" id="today-dismissal">—</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== Quick actions ===================== -->
+  <div class="quick" role="navigation" aria-label="クイックアクセス">
+    <a href="#events-cd">
+      <span class="ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      </span>
+      <span>行事</span>
+    </a>
+    <a href="#tests">
+      <span class="ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h13a3 3 0 0 1 3 3v13"/><path d="M4 4v14a2 2 0 0 0 2 2h14"/><path d="M8 8h6M8 12h8"/></svg>
+      </span>
+      <span>テスト範囲</span>
+    </a>
+    <a href="#faq">
+      <span class="ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 1 1 5.8 1c0 2-3 2-3 4"/><circle cx="12" cy="17" r=".5" fill="currentColor"/></svg>
+      </span>
+      <span>FAQ</span>
+    </a>
+    <a href="#send">
+      <span class="ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-11 11"/><path d="M22 2 15 22l-4-9-9-4z"/></svg>
+      </span>
+      <span>送る</span>
+    </a>
+  </div>
+
+  <!-- ===================== Countdown ===================== -->
+  <section id="events-cd" data-screen-label="02 行事カウントダウン">
+    <div class="section-head">
+      <h2>行事カウントダウン</h2>
+      <span class="hint">近い順</span>
+      <span class="rule"></span>
+    </div>
+    <div class="countdowns" id="countdowns"></div>
+  </section>
+
+  <!-- ===================== Deadlines ===================== -->
+  <section id="deadlines" data-screen-label="03 締切">
+    <div class="section-head">
+      <h2>直近の締切</h2>
+      <span class="hint">忘れちゃダメなやつ</span>
+      <span class="rule"></span>
+    </div>
+    <div class="deadlines" id="deadlines-list"></div>
+  </section>
+
+  <!-- ===================== Week ===================== -->
+  <section id="week" data-screen-label="04 今週">
+    <div class="section-head">
+      <h2>今週の要点</h2>
+      <span class="hint">学年ざっくり</span>
+      <span class="rule"></span>
+    </div>
+    <div class="card week">
+      <div class="week-range" id="week-range"></div>
+      <ul id="week-list"></ul>
+    </div>
+  </section>
+
+  <!-- ===================== Upcoming ===================== -->
+  <section id="upcoming" data-screen-label="05 今後の予定">
+    <div class="section-head">
+      <h2>今後の予定</h2>
+      <span class="hint">学年共通</span>
+      <span class="rule"></span>
+    </div>
+    <div class="card">
+      <ul class="upcoming-list" id="upcoming-list"></ul>
+    </div>
+  </section>
+
+  <!-- ===================== Tests ===================== -->
+  <section id="tests" data-screen-label="06 テスト範囲">
+    <div class="section-head">
+      <h2>テスト範囲</h2>
+      <span class="hint">教科ごと・4クラス共通</span>
+      <span class="rule"></span>
+    </div>
+    <div class="card">
+      <p class="can-do">このページでできること:前期末テストの範囲を教科別に確認／クラスによって違うところは中で切り替え。</p>
+      <div>
+        <span class="test-period" id="test-period">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+          <span id="test-period-label"></span>
+        </span>
+      </div>
+      <div class="subjects" id="subjects"></div>
+    </div>
+  </section>
+
+  <!-- ===================== Goals ===================== -->
+  <section id="goals" data-screen-label="07 目標カレンダー">
+    <div class="section-head">
+      <h2>各クラスの目標</h2>
+      <span class="hint" id="goals-month"></span>
+      <span class="rule"></span>
+    </div>
+    <div class="card">
+      <div class="goals-head">A/B/C/D 4クラス並列で今月の目標を確認できます。</div>
+      <div class="goals-grid" id="goals-grid"></div>
+    </div>
+  </section>
+
+  <!-- ===================== Committees ===================== -->
+  <section id="committees" data-screen-label="08 係・委員会">
+    <div class="section-head">
+      <h2>係・委員会 連絡板</h2>
+      <span class="hint">誰宛？いつまで？</span>
+      <span class="rule"></span>
+    </div>
+    <div class="card">
+      <div class="comm-list" id="comm-list"></div>
+    </div>
+  </section>
+
+  <!-- ===================== Surveys ===================== -->
+  <section id="surveys" data-screen-label="09 アンケート">
+    <div class="section-head">
+      <h2>アンケート</h2>
+      <span class="hint">Googleフォーム連携</span>
+      <span class="rule"></span>
+    </div>
+    <div class="card">
+      <p class="can-do">このページでできること:学年・クラス宛のアンケートに回答／終了したものは結果を見る。</p>
+      <div class="survey-list" id="survey-list"></div>
+    </div>
+  </section>
+
+  <!-- ===================== FAQ ===================== -->
+  <section id="faq" data-screen-label="10 FAQ">
+    <div class="section-head">
+      <h2>質問と答え</h2>
+      <span class="hint">FAQ</span>
+      <span class="rule"></span>
+    </div>
+    <div class="card">
+      <p class="can-do">このページでできること:先生や運営メンバーへの質問の回答を検索／カテゴリで絞り込み。</p>
+      <div class="faq-cats" id="faq-cats"></div>
+      <div class="faqs" id="faqs"></div>
+    </div>
+  </section>
+
+  <!-- ===================== Send (Forms) ===================== -->
+  <section id="send" data-screen-label="11 送る">
+    <div class="section-head">
+      <h2>送る</h2>
+      <span class="hint">意見・質問・アイデア</span>
+      <span class="rule"></span>
+    </div>
+    <div class="card">
+      <p class="can-do">このページでできること:「どんな時に何を送るか」で使い分けます。全部匿名でOK。</p>
+      <div class="forms-grid">
+
+        <a class="form-card" data-kind="opinion" id="form-opinion" href="#">
+          <span class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v12H5.17L4 17.17z"/></svg>
+          </span>
+          <div class="body">
+            <p class="title">意見箱</p>
+            <p class="when" id="form-opinion-when"></p>
+          </div>
+          <span class="arrow">→</span>
+        </a>
+
+        <a class="form-card" data-kind="question" id="form-question" href="#">
+          <span class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 1 1 5.8 1c0 2-3 2-3 4"/><circle cx="12" cy="17" r=".5" fill="currentColor"/></svg>
+          </span>
+          <div class="body">
+            <p class="title">質問フォーム</p>
+            <p class="when" id="form-question-when"></p>
+            <span class="cls-note" id="form-question-cls"></span>
+          </div>
+          <span class="arrow">→</span>
+        </a>
+
+        <a class="form-card" data-kind="feature" id="form-feature" href="#">
+          <span class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6M12 16v6M4.9 4.9l4.2 4.2M14.9 14.9l4.2 4.2M2 12h6M16 12h6M4.9 19.1l4.2-4.2M14.9 9.1l4.2-4.2"/></svg>
+          </span>
+          <div class="body">
+            <p class="title">新機能募集</p>
+            <p class="when" id="form-feature-when"></p>
+          </div>
+          <span class="arrow">→</span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== Others ===================== -->
+  <section id="others" data-screen-label="12 その他">
+    <div class="section-head">
+      <h2>その他</h2>
+      <span class="hint">委員会・ポリシー</span>
+      <span class="rule"></span>
+    </div>
+    <div class="card">
+      <div class="others-list" id="others-list"></div>
+    </div>
+  </section>
+
+  <!-- ===================== Updates ===================== -->
+  <section id="updates" data-screen-label="13 更新履歴">
+    <div class="section-head">
+      <h2>更新履歴</h2>
+      <span class="hint">なにが変わった？</span>
+      <span class="rule"></span>
+    </div>
+    <ul class="updates" id="updates-list"></ul>
+  </section>
+
+  <!-- ===================== Policy ===================== -->
+  <section id="site-policy" data-screen-label="14 サイトポリシー">
+    <div class="section-head">
+      <h2>サイトポリシー</h2>
+      <span class="hint"></span>
+      <span class="rule"></span>
+    </div>
+    <div class="card">
+      <ol class="policy-list" id="policy-list"></ol>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div>DEMO</div>
+</footer>
+
+<!-- ===================== Bottom Tab Bar ===================== -->
+<nav class="tabbar" id="tabbar" aria-label="下部ナビゲーション">
+  <div class="tabbar-inner">
+    <a href="#today" data-target="today">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12 12 4l9 8"/><path d="M5 10v10h14V10"/></svg>
+      <span>今日</span>
+    </a>
+    <a href="#events-cd" data-target="events-cd">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      <span>行事</span>
+    </a>
+    <a href="#tests" data-target="tests">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h13a3 3 0 0 1 3 3v13"/><path d="M4 4v14a2 2 0 0 0 2 2h14"/><path d="M8 8h6M8 12h8"/></svg>
+      <span>テスト</span>
+    </a>
+    <a href="#faq" data-target="faq">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 1 1 5.8 1c0 2-3 2-3 4"/><circle cx="12" cy="17" r=".5" fill="currentColor"/></svg>
+      <span>FAQ</span>
+    </a>
+    <a href="#send" data-target="send">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-11 11"/><path d="M22 2 15 22l-4-9-9-4z"/></svg>
+      <span>送る</span>
+    </a>
+  </div>
+</nav>
+
+<!-- Tweaks button -->
+<button class="tweaks-btn" id="tweaks-btn" title="表示設定" aria-label="表示設定を開く">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.01a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.01a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+</button>
+
+<div id="tweaks-root"></div>
+
+<script>
+/* ==================================================================
+   2Gサイト レンダリング
+   ==================================================================
+   ・DATA を1回だけ読む
+   ・クラス切替は変数 currentClass ("A"|"B"|"C"|"D") を state として保持
+   ・localStorage("2g-my-class") に自分のクラス、("2g-cur-class") に選択中クラスを保存
+   ・「変数名の衝突」に注意（2Bサイトの now 重複事故を回避するため、日時変数は明示的なスコープに閉じ込める）
+   ================================================================== */
+(function () {
+  const DATA = JSON.parse(document.getElementById('site-data').textContent);
+  const $  = (sel, root=document) => root.querySelector(sel);
+  const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
+
+  // ---- State
+  const CLASS_IDS = DATA.classes.map(c => c.id);
+  const savedMy   = safeGet('2g-my-class');
+  const savedCur  = safeGet('2g-cur-class');
+  let myClass     = CLASS_IDS.includes(savedMy) ? savedMy : 'B';
+  let currentClass= CLASS_IDS.includes(savedCur) ? savedCur : myClass;
+
+  // ---- Meta
+  $('#school-name').textContent = `${DATA.meta.schoolName} ${DATA.meta.grade}`;
+  if (DATA.meta.siteName) $('#site-title').textContent = DATA.meta.siteName;
+  // DEMOバッジは固定。meta.version が入っていればそちらを優先
+  if (DATA.meta.version) $('#ver-tag').textContent = DATA.meta.version;
+
+  // ---- CSS variables from classes JSON (色を JSON から上書き可能に)
+  DATA.classes.forEach(c => {
+    document.documentElement.style.setProperty(`--cls-${c.id}`, c.color);
+    document.documentElement.style.setProperty(`--cls-${c.id}-soft`, c.colorSoft);
+    document.documentElement.style.setProperty(`--cls-${c.id}-ink`, c.colorInk);
+  });
+
+  // ---- Class Tabs
+  const clsTabsEl = $('#class-tabs');
+  clsTabsEl.innerHTML = '';
+  DATA.classes.forEach(c => {
+    const b = document.createElement('button');
+    b.className = 'class-tab';
+    b.dataset.cls = c.id;
+    b.setAttribute('role','tab');
+    b.setAttribute('aria-selected', c.id === currentClass ? 'true' : 'false');
+    b.innerHTML = `
+      <span class="cls-dot">${c.id}</span>
+      <span style="font-family:var(--font-display);font-weight:900;">${escapeHtml(c.name)}</span>
+      <span class="cls-label">2年${c.id}組</span>
+      ${c.id === myClass ? '<span class="my-badge">MY</span>' : ''}
+    `;
+    b.onclick = () => setCurrentClass(c.id);
+    clsTabsEl.appendChild(b);
+  });
+
+  function setCurrentClass(id) {
+    if (!CLASS_IDS.includes(id)) return;
+    currentClass = id;
+    safeSet('2g-cur-class', id);
+    // update cur CSS vars
+    document.documentElement.style.setProperty('--cur', `var(--cls-${id})`);
+    document.documentElement.style.setProperty('--cur-soft', `var(--cls-${id}-soft)`);
+    document.documentElement.style.setProperty('--cur-ink', `var(--cls-${id}-ink)`);
+    // update tab UI
+    $$('.class-tab').forEach(el => el.setAttribute('aria-selected', el.dataset.cls === id ? 'true' : 'false'));
+    renderHero();
+    renderForms();
+  }
+  // apply initial cur vars
+  setCurrentClass(currentClass);
+
+  // ---- Hero heading & date label（動的計算・0時に自動更新）
+  // 見出しは選択中クラスに応じて「今日/明日の2X」に切り替わる
+  function renderHeroDate(){
+    const heroDate = new Date();
+    const switchDate = new Date('2026-08-27T00:00:00');
+    let showDate;
+    let prefix;
+    if (heroDate > switchDate) {
+      showDate = new Date(heroDate);
+      showDate.setDate(heroDate.getDate() + 1);
+      prefix = '明日の2';
+    } else {
+      showDate = heroDate;
+      prefix = '今日の2';
+    }
+    $('#today-heading').textContent = prefix + currentClass;
+    const y = showDate.getFullYear();
+    const m = String(showDate.getMonth()+1).padStart(2,'0');
+    const d = String(showDate.getDate()).padStart(2,'0');
+    $('#today-label').textContent = formatDateJa(`${y}-${m}-${d}`);
+  }
+  renderHeroDate();
+  (function scheduleMidnightRefresh(){
+    const nowTs = new Date();
+    const nextMidnight = new Date(nowTs.getFullYear(), nowTs.getMonth(), nowTs.getDate()+1, 0, 0, 5);
+    const ms = nextMidnight - nowTs;
+    setTimeout(() => { renderHeroDate(); renderCountdowns(); renderDeadlines(); scheduleMidnightRefresh(); }, ms);
+  })();
+
+  // ---- Hero body（クラス切替で更新）
+  function renderHero() {
+    const c = DATA.classes.find(x => x.id === currentClass);
+    $('#hero-class-tag').textContent = `2年${c.id}組`;
+    $('#today-note').textContent = DATA.today.note || '';
+    // 見出しもクラス連動で更新
+    renderHeroDate();
+
+    const perClass = DATA.today.perClass[currentClass] || { period: [], cleaning: '—' };
+    const periodsEl = $('#periods');
+    periodsEl.innerHTML = '';
+    perClass.period.forEach(p => {
+      const el = document.createElement('div');
+      el.className = 'period';
+      el.innerHTML = `<span class="n">${p.n}限</span><span class="sub">${escapeHtml(p.subject || '—')}</span>`;
+      periodsEl.appendChild(el);
+    });
+    $('#today-cleaning').textContent = perClass.cleaning || '—';
+    $('#today-dismissal').textContent = DATA.today.dismissalTime || '—';
+  }
+  renderHero();
+
+  // ---- Countdown
+  function renderCountdowns() {
+    const cdEl = $('#countdowns');
+    cdEl.innerHTML = '';
+    const nowRef = stripTime(new Date());
+    // placeholderはソート対象外にして、入力順を尊重
+    const events = [...DATA.events];
+    // 実イベントのうち、未来の一番早いものを is-next に
+    let nextIndex = -1;
+    let nextDays = Infinity;
+    events.forEach((ev, i) => {
+      if (ev.placeholder || !ev.date) return;
+      const target = new Date(ev.date + 'T00:00:00');
+      const days = Math.ceil((target - nowRef) / (1000*60*60*24));
+      if (days >= 0 && days < nextDays) { nextDays = days; nextIndex = i; }
+    });
+    events.forEach((ev, i) => {
+      const el = document.createElement('div');
+      if (ev.placeholder || !ev.date) {
+        el.className = 'cd is-empty';
+        el.innerHTML = `
+          <div class="cd-icon">✨</div>
+          <div class="cd-title">coming soon</div>
+          <div class="cd-days">?</div>
+          <div class="cd-unit">予定未定</div>
+          <div class="cd-date">—</div>
+        `;
+        cdEl.appendChild(el);
+        return;
+      }
+      const target = new Date(ev.date + 'T00:00:00');
+      const days = Math.ceil((target - nowRef) / (1000*60*60*24));
+      const past = days < 0;
+      const isNext = i === nextIndex;
+      el.className = 'cd' + (past ? ' is-past' : '') + (isNext ? ' is-next' : '');
+      el.innerHTML = `
+        <div class="cd-icon">${ev.icon || '📌'}</div>
+        <div class="cd-title">${escapeHtml(ev.title)}</div>
+        <div class="cd-days">${past ? '終了' : (days === 0 ? '本日' : days)}</div>
+        <div class="cd-unit">${past || days === 0 ? '' : '日後'}</div>
+        <div class="cd-date">${formatDateJa(ev.date)}</div>
+      `;
+      cdEl.appendChild(el);
+    });
+  }
+  renderCountdowns();
+
+  // ---- Deadlines
+  function renderDeadlines() {
+    const el = $('#deadlines-list');
+    el.innerHTML = '';
+    const nowRef = stripTime(new Date());
+    DATA.deadlines.forEach(d => {
+      const target = new Date(d.date + 'T00:00:00');
+      const days = Math.ceil((target - nowRef) / (1000*60*60*24));
+      let cls = '';
+      if (days <= 3) cls = 'hot';
+      else if (days <= 7) cls = 'warn';
+      const numLabel = days < 0
+        ? `<span class="num">終了</span>`
+        : days === 0
+          ? `<span class="num">本日</span>`
+          : `<span class="num">${days}</span><span class="unit">日後</span>`;
+      const node = document.createElement('div');
+      node.className = `deadline ${cls}`;
+      node.innerHTML = `
+        <div class="days">${numLabel}</div>
+        <div class="info">
+          <div class="title">${escapeHtml(d.title)}</div>
+          <div class="meta">
+            <span>${formatDateJa(d.date)}</span>
+            ${d.note ? `<span>・ ${escapeHtml(d.note)}</span>` : ''}
+            ${renderTargetChips(d.target)}
+          </div>
+        </div>
+      `;
+      el.appendChild(node);
+    });
+  }
+  renderDeadlines();
+
+  // ---- Week
+  $('#week-range').textContent = DATA.thisWeek.range;
+  const weekList = $('#week-list');
+  weekList.innerHTML = '';
+  DATA.thisWeek.highlights.forEach(t => {
+    const li = document.createElement('li');
+    li.textContent = t;
+    weekList.appendChild(li);
+  });
+
+  // ---- Upcoming
+  const upcomingEl = $('#upcoming-list');
+  upcomingEl.innerHTML = '';
+  DATA.upcoming.forEach(u => {
+    const li = document.createElement('li');
+    li.innerHTML = `
+      <span class="date">${escapeHtml(u.date)}</span>
+      <span class="row-r">
+        <span>${escapeHtml(u.title)}</span>
+        ${renderTargetChips(u.target)}
+      </span>
+    `;
+    upcomingEl.appendChild(li);
+  });
+
+  // ---- Tests
+  $('#test-period-label').textContent = `${DATA.tests.name}:${DATA.tests.period}`;
+  const subjectsEl = $('#subjects');
+  subjectsEl.innerHTML = '';
+  DATA.tests.subjects.forEach(s => {
+    const det = document.createElement('details');
+    det.className = 'subject';
+    const perClassEntries = s.perClass ? Object.entries(s.perClass).filter(([_,v]) => v && String(v).trim()) : [];
+    det.innerHTML = `
+      <summary>
+        <span class="subject-chip" data-c="${escapeHtml(s.subject)}">${escapeHtml(s.subject.charAt(0))}</span>
+        <span>${escapeHtml(s.subject)}</span>
+        <span style="margin-left:8px;font-weight:500;font-size:12px;color:var(--ink-3)">${escapeHtml(s.teacher || '')}</span>
+      </summary>
+      <div class="body">
+        ${escapeHtml(s.range)}
+        ${s.tip ? `<div class="tip">💡 ${escapeHtml(s.tip)}</div>` : ''}
+        ${perClassEntries.length ? `
+          <div class="perclass-title">クラスによって違うところ</div>
+          <div class="perclass">
+            ${perClassEntries.map(([cls, txt]) => `
+              <div class="row"><span class="c" data-c="${escapeHtml(cls)}">${escapeHtml(cls)}</span><span>${escapeHtml(txt)}</span></div>
+            `).join('')}
+          </div>
+        ` : ''}
+      </div>
+    `;
+    subjectsEl.appendChild(det);
+  });
+
+  // ---- Goals
+  $('#goals-month').textContent = DATA.goals.monthLabel || '';
+  const goalsGrid = $('#goals-grid');
+  goalsGrid.innerHTML = '';
+  const goalsByClass = DATA.goals.byClass || {};
+  const hasGoals = Object.keys(goalsByClass).some(k => goalsByClass[k] && goalsByClass[k].goal);
+  if (!hasGoals) {
+    goalsGrid.style.gridTemplateColumns = '1fr';
+    goalsGrid.innerHTML = `
+      <div class="coming-soon">
+        <span class="cs-emoji">🎯</span>
+        coming soon
+        <span class="cs-sub">各クラスの目標は今後集めて並べます</span>
+      </div>
+    `;
+  } else {
+    goalsGrid.style.gridTemplateColumns = '';
+    DATA.classes.forEach(c => {
+      const g = goalsByClass[c.id] || { goal: '（未設定）', note: '' };
+      const el = document.createElement('div');
+      el.className = 'goal-card' + (c.id === myClass ? ' is-mine' : '');
+      el.dataset.c = c.id;
+      el.innerHTML = `
+        <div class="cls-head">
+          <span class="cls-badge">${c.id}</span>
+          <span>2年${escapeHtml(c.name)}</span>
+        </div>
+        <div class="goal-text">${escapeHtml(g.goal || '（未設定）')}</div>
+        ${g.note ? `<div class="goal-note">${escapeHtml(g.note)}</div>` : ''}
+      `;
+      goalsGrid.appendChild(el);
+    });
+  }
+
+  // ---- Committees
+  const commEl = $('#comm-list');
+  commEl.innerHTML = '';
+  if (!DATA.committees || DATA.committees.length === 0) {
+    commEl.innerHTML = `
+      <div class="coming-soon">
+        <span class="cs-emoji">📌</span>
+        coming soon
+        <span class="cs-sub">係・委員会の連絡はここに載ります</span>
+      </div>
+    `;
+  } else {
+    DATA.committees.forEach(cm => {
+      const el = document.createElement('div');
+      el.className = 'comm-item';
+      el.innerHTML = `
+        <div class="comm-head">
+          <span class="comm-name">${escapeHtml(cm.name)}</span>
+          ${renderTargetChips(cm.target)}
+        </div>
+        <div class="comm-msg">${escapeHtml(cm.message)}</div>
+        ${cm.deadline ? `<div class="comm-meta">締切:${formatDateJa(cm.deadline)}</div>` : ''}
+      `;
+      commEl.appendChild(el);
+    });
+  }
+
+  // ---- Surveys
+  const surveyEl = $('#survey-list');
+  surveyEl.innerHTML = '';
+  const nowRefS = stripTime(new Date());
+  if (!DATA.surveys || DATA.surveys.length === 0) {
+    surveyEl.innerHTML = `
+      <div class="coming-soon">
+        <span class="cs-emoji">📊</span>
+        coming soon
+        <span class="cs-sub">学年・クラス宛のアンケートはここに載ります</span>
+      </div>
+    `;
+  } else {
+    DATA.surveys.forEach(s => {
+      const deadline = s.deadline ? new Date(s.deadline + 'T00:00:00') : null;
+      const closed = deadline && deadline < nowRefS;
+      const el = document.createElement('div');
+      el.className = 'survey-item' + (closed ? ' is-closed' : '');
+      el.innerHTML = `
+        <div class="row-1">
+          <span class="title">${escapeHtml(s.title)}</span>
+          ${renderTargetChips(s.target)}
+        </div>
+        <div class="meta">
+          ${deadline ? `<span>締切:${formatDateJa(s.deadline)}${closed ? '（終了）' : ''}</span>` : ''}
+        </div>
+        ${closed
+          ? (s.resultUrl
+              ? `<a class="btn btn-ghost" href="${escapeHtml(s.resultUrl)}" target="_blank" rel="noopener">結果を見る →</a>`
+              : `<span class="btn">受付終了</span>`)
+          : `<a class="btn" href="${escapeHtml(s.url)}" target="_blank" rel="noopener">回答する →</a>`
+        }
+      `;
+      surveyEl.appendChild(el);
+    });
+  }
+
+  // ---- FAQ
+  const cats = ['すべて', ...Array.from(new Set(DATA.faqs.map(f => f.category)))];
+  const catsEl = $('#faq-cats');
+  catsEl.innerHTML = '';
+  cats.forEach((c, i) => {
+    const b = document.createElement('button');
+    b.textContent = c;
+    b.setAttribute('aria-pressed', i === 0 ? 'true' : 'false');
+    b.dataset.cat = c;
+    b.addEventListener('click', () => {
+      $$('.faq-cats button').forEach(x => x.setAttribute('aria-pressed', x === b ? 'true' : 'false'));
+      renderFaqs();
+    });
+    catsEl.appendChild(b);
+  });
+  const faqsEl = $('#faqs');
+  function renderFaqs() {
+    const activeCat = $('.faq-cats button[aria-pressed="true"]')?.dataset.cat || 'すべて';
+    const q = ($('#global-search').value || '').trim().toLowerCase();
+    const filtered = DATA.faqs.filter(f => {
+      const okCat = activeCat === 'すべて' || f.category === activeCat;
+      const okQ = !q || (f.q + ' ' + f.a + ' ' + f.category).toLowerCase().includes(q);
+      return okCat && okQ;
+    });
+    faqsEl.innerHTML = '';
+    if (filtered.length === 0) {
+      faqsEl.innerHTML = `<div class="faq-empty">該当する質問が見つかりません</div>`;
+      return;
+    }
+    filtered.forEach(f => {
+      const det = document.createElement('details');
+      det.className = 'faq';
+      det.innerHTML = `
+        <summary><span>${escapeHtml(f.q)}</span></summary>
+        <div class="a">${escapeHtml(f.a)}</div>
+      `;
+      faqsEl.appendChild(det);
+    });
+  }
+  renderFaqs();
+  $('#global-search').addEventListener('input', () => { renderFaqs(); });
+
+  // ---- Forms (質問フォームは選択中クラスで切替)
+  function renderForms() {
+    $('#form-opinion').href = DATA.forms.opinion.url;
+    $('#form-opinion-when').textContent = DATA.forms.opinion.when;
+
+    const qByClass = DATA.forms.question.byClass || {};
+    const qUrl = qByClass[currentClass] || Object.values(qByClass)[0] || '#';
+    $('#form-question').href = qUrl;
+    $('#form-question-when').textContent = DATA.forms.question.when;
+    $('#form-question-cls').textContent = `送信先:2年${currentClass}組`;
+
+    $('#form-feature').href = DATA.forms.feature.url;
+    $('#form-feature-when').textContent = DATA.forms.feature.when;
+  }
+  renderForms();
+
+  // ---- Others
+  const othersEl = $('#others-list');
+  othersEl.innerHTML = '';
+  DATA.others.forEach(o => {
+    const isDisabled = !!o.disabled || !o.url || o.url === '#';
+    const node = document.createElement(isDisabled ? 'div' : 'a');
+    if (!isDisabled) node.href = o.url;
+    if (isDisabled) node.classList.add('is-disabled');
+    node.innerHTML = `
+      <div>
+        <div class="title">${escapeHtml(o.title)}</div>
+        <div class="desc">${escapeHtml(o.desc)}</div>
+      </div>
+      <span class="arrow">${isDisabled ? '' : '→'}</span>
+    `;
+    othersEl.appendChild(node);
+  });
+
+  // ---- Updates
+  const updatesEl = $('#updates-list');
+  updatesEl.innerHTML = '';
+  if (!DATA.updates || DATA.updates.length === 0) {
+    const li = document.createElement('li');
+    li.style.listStyle = 'none';
+    li.style.padding = '0';
+    li.style.background = 'transparent';
+    li.style.border = '0';
+    li.innerHTML = `
+      <div class="coming-soon">
+        <span class="cs-emoji">📝</span>
+        coming soon
+        <span class="cs-sub">更新履歴はここに並びます</span>
+      </div>
+    `;
+    updatesEl.appendChild(li);
+  } else {
+    DATA.updates.forEach(u => {
+      const li = document.createElement('li');
+      li.innerHTML = `
+        <div class="meta"><span class="ver">${escapeHtml(u.ver)}</span><span>${formatDateJa(u.date)}</span></div>
+        <div>${escapeHtml(u.text)}</div>
+      `;
+      updatesEl.appendChild(li);
+    });
+  }
+
+  // ---- Policy
+  const policyEl = $('#policy-list');
+  policyEl.innerHTML = '';
+  DATA.policy.forEach(p => {
+    const li = document.createElement('li');
+    li.textContent = p;
+    policyEl.appendChild(li);
+  });
+
+  // ---- Bottom tab active state
+  const sections = ['today', 'events-cd', 'tests', 'faq', 'send'];
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        $$('.tabbar a').forEach(a => a.classList.toggle('active', a.dataset.target === id));
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) io.observe(el);
+  });
+
+  // ---- Expose class setter for Tweaks
+  window.__2g = {
+    setMyClass(id) {
+      if (!CLASS_IDS.includes(id)) return;
+      myClass = id;
+      safeSet('2g-my-class', id);
+      // MYバッジ更新
+      $$('.class-tab').forEach(el => {
+        el.querySelector('.my-badge')?.remove();
+        if (el.dataset.cls === id) {
+          const s = document.createElement('span');
+          s.className = 'my-badge';
+          s.textContent = 'MY';
+          el.appendChild(s);
+        }
+      });
+      // 目標カード再描画（is-mine 移す）
+      $$('#goals-grid .goal-card').forEach(el => {
+        el.classList.toggle('is-mine', el.dataset.c === id);
+      });
+      // 自分のクラス選択に切替
+      setCurrentClass(id);
+    },
+    getMyClass() { return myClass; },
+    getCurrentClass() { return currentClass; }
+  };
+
+  // ---- Helpers
+  function escapeHtml(str) {
+    return String(str ?? '')
+      .replaceAll('&', '&amp;')
+      .replaceAll('<', '&lt;')
+      .replaceAll('>', '&gt;')
+      .replaceAll('"', '&quot;')
+      .replaceAll("'", '&#39;');
+  }
+  function formatDateJa(iso) {
+    if (!iso) return '';
+    const d = new Date(iso + 'T00:00:00');
+    if (isNaN(d)) return iso;
+    const w = ['日','月','火','水','木','金','土'][d.getDay()];
+    return `${d.getMonth()+1}月${d.getDate()}日（${w}）`;
+  }
+  function stripTime(dt) {
+    const x = new Date(dt);
+    x.setHours(0,0,0,0);
+    return x;
+  }
+  function renderTargetChips(target) {
+    if (!target || target === 'all' || target === '*') {
+      return `<span class="target-chip" data-t="all">全クラス</span>`;
+    }
+    const arr = String(target).split(',').map(s => s.trim()).filter(Boolean);
+    return arr.map(t => `<span class="target-chip" data-t="${escapeHtml(t)}">${escapeHtml(t)}組</span>`).join('');
+  }
+  function safeGet(k){ try { return localStorage.getItem(k); } catch(e){ return null; } }
+  function safeSet(k,v){ try { localStorage.setItem(k,v); } catch(e){} }
+})();
+
+/* ==================================================================
+   Tweaks（表示設定）
+   ================================================================== */
+(function () {
+  const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+    "myClass": "B",
+    "dark": false,
+    "showTabbar": true
+  }/*EDITMODE-END*/;
+
+  const state = { ...TWEAK_DEFAULTS };
+  try {
+    const saved = localStorage.getItem('2g-tweaks');
+    if (saved) Object.assign(state, JSON.parse(saved));
+    // myClass は 2g-my-class を優先
+    const myLS = localStorage.getItem('2g-my-class');
+    if (myLS) state.myClass = myLS;
+  } catch(e){}
+
+  function apply() {
+    document.body.setAttribute('data-theme', state.dark ? 'dark' : 'light');
+    document.getElementById('tabbar').style.display = state.showTabbar ? '' : 'none';
+    document.body.style.paddingBottom = state.showTabbar ? '' : '32px';
+    if (window.__2g && window.__2g.getMyClass && window.__2g.getMyClass() !== state.myClass) {
+      window.__2g.setMyClass(state.myClass);
+    }
+  }
+  apply();
+
+  function save() {
+    try { localStorage.setItem('2g-tweaks', JSON.stringify(state)); } catch(e){}
+  }
+
+  const root = document.getElementById('tweaks-root');
+  function openPanel() {
+    root.innerHTML = `
+      <div class="tw-overlay">
+        <div class="tw-panel" role="dialog" aria-label="表示設定">
+          <div class="tw-head">
+            <strong>表示設定</strong>
+            <button class="tw-close" aria-label="閉じる">×</button>
+          </div>
+          <div class="tw-body">
+            <div class="tw-row">
+              <label>自分のクラス</label>
+              <div class="tw-cls-picker">
+                ${['A','B','C','D'].map(id => `
+                  <button class="tw-cls${state.myClass===id?' on':''}" data-cls="${id}" style="--c:var(--cls-${id})">${id}</button>
+                `).join('')}
+              </div>
+            </div>
+            <div class="tw-row">
+              <label>ダークモード</label>
+              <label class="tw-toggle">
+                <input type="checkbox" id="tw-dark" ${state.dark ? 'checked':''}>
+                <span></span>
+              </label>
+            </div>
+            <div class="tw-row">
+              <label>下部タブバーを表示</label>
+              <label class="tw-toggle">
+                <input type="checkbox" id="tw-tab" ${state.showTabbar ? 'checked':''}>
+                <span></span>
+              </label>
+            </div>
+            <div class="tw-hint">設定はこの端末のブラウザに保存されます。<br>自分のクラスを選ぶと、開いた時にそのクラスが最初に表示されます。</div>
+          </div>
+        </div>
+      </div>
+    `;
+    root.querySelector('.tw-close').onclick = closePanel;
+    root.querySelector('.tw-overlay').addEventListener('click', (e) => {
+      if (e.target.classList.contains('tw-overlay')) closePanel();
+    });
+    root.querySelectorAll('.tw-cls').forEach(b => {
+      b.onclick = () => {
+        state.myClass = b.dataset.cls;
+        save();
+        if (window.__2g) window.__2g.setMyClass(state.myClass);
+        // update UI in panel
+        root.querySelectorAll('.tw-cls').forEach(x => x.classList.toggle('on', x.dataset.cls === state.myClass));
+      };
+    });
+    root.querySelector('#tw-dark').onchange = e => { state.dark = e.target.checked; save(); apply(); };
+    root.querySelector('#tw-tab').onchange = e => { state.showTabbar = e.target.checked; save(); apply(); };
+  }
+  function closePanel() { root.innerHTML = ''; }
+  document.getElementById('tweaks-btn').onclick = openPanel;
+})();
+</script>
+
+<style>
+/* ---- Tweaks Panel (inline) ---- */
+.tw-overlay {
+  position: fixed; inset: 0; z-index: 100;
+  background: rgba(20,22,28,.4);
+  display: grid; align-items: end; justify-items: center;
+}
+.tw-panel {
+  width: min(420px, 100%);
+  background: var(--surface);
+  border-radius: 20px 20px 0 0;
+  padding: 0;
+  max-height: 90vh;
+  overflow: auto;
+  animation: tw-in .22s ease;
+}
+@keyframes tw-in { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.tw-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--font-display);
+  font-size: 16px;
+}
+.tw-close {
+  background: transparent; border: 0; font-size: 22px;
+  color: var(--ink-3); cursor: pointer; line-height: 1; padding: 4px 8px;
+}
+.tw-body { padding: 6px 18px 24px; }
+.tw-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line-2);
+  gap: 12px;
+}
+.tw-row:last-of-type { border-bottom: 0; }
+.tw-row label { font-size: 14px; font-weight: 500; }
+.tw-cls-picker { display: flex; gap: 6px; }
+.tw-cls {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background: var(--c);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,.12);
+  transition: transform .12s ease;
+}
+.tw-cls.on { border-color: var(--ink); transform: translateY(-2px); }
+.tw-toggle { position: relative; display: inline-block; width: 44px; height: 26px; }
+.tw-toggle input { opacity: 0; width: 0; height: 0; }
+.tw-toggle span {
+  position: absolute; inset: 0;
+  background: var(--line);
+  border-radius: 999px;
+  transition: .2s;
+}
+.tw-toggle span::before {
+  content: ""; position: absolute; left: 3px; top: 3px;
+  width: 20px; height: 20px; background: #fff;
+  border-radius: 999px; transition: .2s;
+  box-shadow: var(--shadow-sm);
+}
+.tw-toggle input:checked + span { background: var(--accent); }
+.tw-toggle input:checked + span::before { transform: translateX(18px); }
+.tw-hint { color: var(--ink-3); font-size: 12px; padding-top: 10px; line-height: 1.5; }
+</style>
+
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","spa":2}' crossorigin="anonymous"></script>
+</body>
+</html>
