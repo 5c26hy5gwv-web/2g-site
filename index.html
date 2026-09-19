@@ -52,34 +52,10 @@
     "note": "夏休み中は時間割はお休みモードです。8月27日に更新します。",
     "dismissalTime": "—",
     "perClass": {
-      "A": {
-        "period": [
-          {"n":1,"subject":"—"},{"n":2,"subject":"—"},{"n":3,"subject":"—"},
-          {"n":4,"subject":"—"},{"n":5,"subject":"—"},{"n":6,"subject":"—"}
-        ],
-        "cleaning": "—"
-      },
-      "B": {
-        "period": [
-          {"n":1,"subject":"—"},{"n":2,"subject":"—"},{"n":3,"subject":"—"},
-          {"n":4,"subject":"—"},{"n":5,"subject":"—"},{"n":6,"subject":"—"}
-        ],
-        "cleaning": "—"
-      },
-      "C": {
-        "period": [
-          {"n":1,"subject":"—"},{"n":2,"subject":"—"},{"n":3,"subject":"—"},
-          {"n":4,"subject":"—"},{"n":5,"subject":"—"},{"n":6,"subject":"—"}
-        ],
-        "cleaning": "—"
-      },
-      "D": {
-        "period": [
-          {"n":1,"subject":"—"},{"n":2,"subject":"—"},{"n":3,"subject":"—"},
-          {"n":4,"subject":"—"},{"n":5,"subject":"—"},{"n":6,"subject":"—"}
-        ],
-        "cleaning": "—"
-      }
+      "A": {},
+      "B": {},
+      "C": {},
+      "D": {}
     }
   },
   "thisWeek": {
@@ -1454,6 +1430,7 @@ footer {
   let DatasFromDB = [undefined,undefined,undefined,undefined,undefined];
   let now = new Date();
 ///ここから特殊処理(ここになんか問題あったら2B07まで)///
+///もともとあった処理は全部通信完了後まで待つ非同期処理になりました。
     //16時までは昨日の日付、16時以降は今日の日付を返す
     if(now.getHours() < 14){
       isrendertoday = true;
@@ -1463,6 +1440,7 @@ footer {
     };
 
   function DataLoadFromDB(){
+    return new Promise((resolve,reject) => {
     const urllast = ["2A","2B","2C","2D","Same"];
     //書くのが今日なら見せるのは昨日
     let searchdate = new Date();
@@ -1489,6 +1467,7 @@ footer {
       .then(response => {
         if(response.ok == false){
           alert("予期せぬエラーが発生しました。");
+          reject()
         }
         else {
           return response.text();
@@ -1507,20 +1486,23 @@ footer {
             a = true;
           };
         });
+        resolve();
       })
       //エラー時処理
       .catch(error => {
         alert("予期せぬエラーが発生しました：" + error);
+        reject();
       });
     }
-    //これにて取得完了
+    //
+  })
   }
-  DataLoadFromDB();
+  DataLoadFromDB().then(() => {
 
 ///ここまで特殊処理///
 
 /* ==================================================================
-   2Gサイト レンダリング
+   2Gサイト レンダリング=非同期処理
    ==================================================================
    ・DATA を1回だけ読む
    ・クラス切替は変数 currentClass ("A"|"B"|"C"|"D") を state として保持
@@ -2178,6 +2160,8 @@ footer {
   function closePanel() { root.innerHTML = ''; }
   document.getElementById('tweaks-btn').onclick = openPanel;
 })();
+  });
+  DataLoadFromDB();
 </script>
 
 <style>
