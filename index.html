@@ -1449,6 +1449,76 @@ footer {
 <div id="tweaks-root"></div>
 
 <script>
+  let isrendertoday = true;
+  let scheduledate;
+  let DatasFromDB = [undefined,undefined,undefined,undefined,undefined];
+  let now = new Date();
+///ここから特殊処理(ここになんか問題あったら2B07まで)///
+    //16時までは昨日の日付、16時以降は今日の日付を返す
+    if(now.getHours() < 14){
+      isrendertoday = true;
+    }
+    else{
+      isrendertoday = false;
+    };
+
+  function DataLoadFromDB(){
+    const urllast = ["2A","2B","2C","2D","Same"];
+    //書くのが今日なら見せるのは昨日
+    let searchdate = new Date();
+    if(isrendertoday == true){
+      searchdate.setDate(now.getDate() - 1);
+    }
+    else{
+      searchdate.setDate(now.getDate());
+    }
+    let searchdateall = (String(searchdate.getFullYear()).padStart(4,"0") + String(searchdate.getMonth() + 1).padStart(2,"0") + String(searchdate.getDate()).padStart(2,"0"));
+
+    //取得処理
+    for(let i = 0;i < 5;i++){
+      let retarr = [];
+      fetch(("https://ikwhbxyhjlfxtgcffhxk.supabase.co/rest/v1/" + urllast[i]),{
+        "method":"GET",
+        "headers":{
+          "apikey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlrd2hieHloamxmeHRnY2ZmaHhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk4MTczMjMsImV4cCI6MjEwNTM5MzMyM30.Ju56fyHy8UJ3ooQWRcMGXDPjleKJ0kdMn0cb4HFJYZg",
+          "authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlrd2hieHloamxmeHRnY2ZmaHhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk4MTczMjMsImV4cCI6MjEwNTM5MzMyM30.Ju56fyHy8UJ3ooQWRcMGXDPjleKJ0kdMn0cb4HFJYZg",
+          "content-type":"application/json"
+        }
+      })
+      //まず、正常にデータが渡されてたら値を引き継ぐ
+      .then(response => {
+        if(response.ok == false){
+          alert("予期せぬエラーが発生しました。");
+        }
+        else {
+          return response.text();
+        };
+      })
+      //引き継いだ値を一度{array:文字列}でJSON.parseしてから.arrayで取り出すことで無理やり文字列を配列にする
+      .then(ret => {
+        let a = false;
+        ((JSON.parse('{"array":' + ret + '}')).array).forEach(data => {
+          let datadate = (data.Date).split("-");
+          let dateall = Number(datadate[0] + datadate[1] + datadate[2]);
+          //指定された日にちより後の日を一日だけ取る
+          if((dateall > searchdateall) && (a == false)){
+            DatasFromDB[i] = data;
+            scheduledate = [datadate[0],datadate[1],datadate[2]];
+            a = true;
+          };
+        });
+      })
+      //エラー時処理
+      .catch(error => {
+        alert("予期せぬエラーが発生しました：" + error);
+      });
+    }
+    //これにて取得完了
+  }
+  DataLoadFromDB();
+
+///ここまで特殊処理///
+
 /* ==================================================================
    2Gサイト レンダリング
    ==================================================================
@@ -1519,18 +1589,18 @@ footer {
 
   // ---- Hero heading & date label（動的計算・0時に自動更新）
   // 見出しは選択中クラスに応じて「今日/明日の2X」に切り替わる
+  //2B07の書き換え箇所：どう考えても14時くらいを境に変えた方が便利なので14時で変えるようにする。
   function renderHeroDate(){
-    const heroDate = new Date();
-    const switchDate = new Date('2026-08-27T00:00:00');
     let showDate;
     let prefix;
-    if (heroDate > switchDate) {
-      showDate = new Date(heroDate);
-      showDate.setDate(heroDate.getDate() + 1);
-      prefix = '明日の2';
-    } else {
-      showDate = heroDate;
+    if ((Number(scheduledate[0]) == now.getFullYear()) && (Number(scheduledate[1]) == (now.getHours() + 1)) && (Number(scheduledate[2]) == now.getDay())) {
+      showDate = now;
       prefix = '今日の2';
+    } else {
+      showDate = new Date();
+      showDate.setFullYear(Number(scheduledate[0]),Number(scheduledate[1] - 1),Number(scheduledate[2]));
+      const youbi = ["日","月","火","水","木","金","土"];
+      prefix = String(showDate.getMonth() + 1) + "月" + String(showDate.getDate()) + '日' + youbi[showDate.getDay()] + "曜日" + 'の2';
     }
     $('#today-heading').textContent = prefix + currentClass;
     const y = showDate.getFullYear();
@@ -1551,23 +1621,52 @@ footer {
     const c = DATA.classes.find(x => x.id === currentClass);
     $('#hero-class-tag').textContent = `2年${c.id}組`;
      //!多分ここで概要を打ち込んでる
-    $('#today-note').textContent = DATA.today.note || '';
+     //データベースから読み込み
+     if(DatasFromDB[4] == undefined){$('#today-note').textContent = "情報なし"}
+     else{
+      $('#today-note').textContent = DatasFromDB[4].Note;
+     }
     // 見出しもクラス連動で更新
     renderHeroDate();
 
     const perClass = DATA.today.perClass[currentClass] || { period: [], cleaning: '—' };
     const periodsEl = $('#periods');
     periodsEl.innerHTML = '';
-    perClass.period.forEach(p => {
-      const el = document.createElement('div');
-      el.className = 'period';
-      el.innerHTML = `<span class="n">${p.n}限</span><span class="sub">${escapeHtml(p.subject || '—')}</span>`;
-      periodsEl.appendChild(el);
-    });
-    $('#today-cleaning').textContent = perClass.cleaning || '—';
-    $('#today-dismissal').textContent = DATA.today.dismissalTime || '—';
+    //クラスを番号へ返還
+    const classcheck = ["A","B","C","D"];
+    let classnum = classcheck.indexOf(currentClass);
+    for(let n = 1;n < 7;n++){
+      if(DatasFromDB[classnum] == undefined){
+        const el = document.createElement('div');
+        el.className = 'period';
+        el.innerHTML = '<span class="n">' + n + `限</span><span class="sub">不明</span>`;
+        periodsEl.appendChild(el);
+        }
+      else{
+        const el = document.createElement('div');
+        el.className = 'period';
+        el.innerHTML = '<span class="n">' + n + `限</span><span class="sub">${escapeHtml(DatasFromDB[classnum][n])}</span>`;
+        periodsEl.appendChild(el);
+      }
+    }
+
+    if(DatasFromDB[4] == undefined){
+      $('#today-cleaning').textContent = "不明";
+      $('#today-dismissal').textContent = "不明";
+    }
+    else{
+      $('#today-cleaning').textContent = DatasFromDB[4].Cleaning;
+      let finalgohometime = [...DatasFromDB[4].FinalGoHomeTime.split(":")];
+      $('#today-dismissal').textContent = (finalgohometime[0] + "時" + finalgohometime[1] + "分");
+    };
   }
   renderHero();
+
+  function plusclus(curclass,n,m){
+
+
+
+  }
 
   // ---- Countdown
   function renderCountdowns() {
