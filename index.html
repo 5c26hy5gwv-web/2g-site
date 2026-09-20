@@ -1441,6 +1441,7 @@ footer {
 
   function DataLoadFromDB(){
     return new Promise((resolve,reject) => {
+    let allfetch = [];
     const urllast = ["2A","2B","2C","2D","Same"];
     //書くのが今日なら見せるのは昨日
     let searchdate = new Date();
@@ -1454,8 +1455,8 @@ footer {
 
     //取得処理
     for(let i = 0;i < 5;i++){
-      let retarr = [];
-      fetch(("https://ikwhbxyhjlfxtgcffhxk.supabase.co/rest/v1/" + urllast[i]),{
+    allfetch.push(new Promise((resolve,reject) => {
+        fetch(("https://ikwhbxyhjlfxtgcffhxk.supabase.co/rest/v1/" + urllast[i]),{
         "method":"GET",
         "headers":{
           "apikey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlrd2hieHloamxmeHRnY2ZmaHhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk4MTczMjMsImV4cCI6MjEwNTM5MzMyM30.Ju56fyHy8UJ3ooQWRcMGXDPjleKJ0kdMn0cb4HFJYZg",
@@ -1482,7 +1483,9 @@ footer {
           //指定された日にちより後の日を一日だけ取る
           if((dateall > searchdateall) && (a == false)){
             DatasFromDB[i] = data;
-            scheduledate = [datadate[0],datadate[1],datadate[2]];
+            if(i == 4){
+                scheduledate = [datadate[0],datadate[1],datadate[2]];
+            }
             a = true;
           };
         });
@@ -1493,8 +1496,9 @@ footer {
         alert("予期せぬエラーが発生しました：" + error);
         reject();
       });
+    }));
     }
-    //
+    Promise.all(allfetch).then(() => {resolve();})
   })
   }
   DataLoadFromDB().then(() => {
