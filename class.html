@@ -5,21 +5,27 @@
         <title>時間割</title>
         <!--学校の情報なのでクロールで表示しないようにする！-->
         <meta name="robots" content="none">
+        <!--CSSは分からんのだわ。誰か有識者よ、組んでくれ-->
+        <style>
+            body{
+                background-color: #f6f7fb;
+            }
+        </style>
     </head>
     <body>
-        <h1>現在登録されている時間割</h1>
+        <h1>過去・未来の時間割</h1>
         <h2 id="loading">読み込み中…</h2>
         <div id="info" hidden="true">
         <h3>2A</h3>
-        <table id="nowinfoA" border="1"></table>
+        <table id="nowinfoA" border="2"></table>
         <h3>2B</h3>
-        <table id="nowinfoB" border="1"></table>
+        <table id="nowinfoB" border="2"></table>
         <h3>2C</h3>
-        <table id="nowinfoC" border="1"></table>
+        <table id="nowinfoC" border="2"></table>
         <h3>2D</h3>
-        <table id="nowinfoD" border="1"></table>
+        <table id="nowinfoD" border="2"></table>
         <h3>共通</h3>
-        <table id="nowinfoS" border="1"></table>
+        <table id="nowinfoS" border="2"></table>
         </div>
 
         <script>
