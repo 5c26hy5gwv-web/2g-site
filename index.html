@@ -643,7 +643,7 @@ section { scroll-margin-top: 84px; }
 /* --------- Quick actions --------- */
 .quick {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 8px;
   margin-top: 6px;
 }
@@ -1095,7 +1095,7 @@ footer {
 }
 @media (min-width: 720px) {
   .forms-grid { grid-template-columns: 1fr 1fr 1fr; }
-  .quick { grid-template-columns: repeat(4, 1fr); max-width: 520px; }
+  .quick { grid-template-columns: repeat(5, 1fr); max-width: 520px; }
   .goals-grid { grid-template-columns: repeat(4, 1fr); }
   body { padding-bottom: 40px; }
   .tabbar { display: none; }
@@ -1183,6 +1183,11 @@ footer {
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-11 11"/><path d="M22 2 15 22l-4-9-9-4z"/></svg>
       </span>
       <span>送る</span>
+    <a href="class.html">
+      <span class="ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      </span>
+      <span>過去・未来の時間割</span>
     </a>
   </div>
 
@@ -1618,7 +1623,7 @@ footer {
     const perClass = DATA.today.perClass[currentClass] || { period: [], cleaning: '—' };
     const periodsEl = $('#periods');
     periodsEl.innerHTML = '';
-    //クラスを番号へ返還
+    //クラスを番号へ変換
     const classcheck = ["A","B","C","D"];
     let classnum = classcheck.indexOf(currentClass);
     for(let n = 1;n < 7;n++){

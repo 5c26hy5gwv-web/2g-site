@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>時間割</title>
+        <!--学校の情報なのでクロールで表示しないようにする！-->
+        <meta name="robots" content="none">
+        <!--CSSは分からんのだわ。誰か有識者よ、組んでくれ-->
+        <style>
+            body{
+                background-color: #f6f7fb;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>過去・未来の時間割</h1>
+        <h2 id="loading">読み込み中…</h2>
+        <div id="info" hidden="true">
+        <h3>2A</h3>
+        <table id="nowinfoA" border="2"></table>
+        <h3>2B</h3>
+        <table id="nowinfoB" border="2"></table>
+        <h3>2C</h3>
+        <table id="nowinfoC" border="2"></table>
+        <h3>2D</h3>
+        <table id="nowinfoD" border="2"></table>
+        <h3>共通</h3>
+        <table id="nowinfoS" border="2"></table>
+        </div>
+
+        <script>
+            let getdata = {
+                _2A:[],
+                _2B:[],
+                _2C:[],
+                _2D:[],
+                _Same:[]
+            };
+            const urllast = ["2A","2B","2C","2D","Same"]
+            const $docdata = [document.getElementById("nowinfoA"),document.getElementById("nowinfoB"),document.getElementById("nowinfoC"),document.getElementById("nowinfoD"),document.getElementById("nowinfoS")];
+            const $info = document.getElementById("info");
+            const $loading = document.getElementById("loading");
+            function dataload(){
+                return new Promise((resolve,reject) => {
+                    let check = [];
+                    //取得処理
+                    for(let i = 0;i < 5;i++){
+                        check.push(new Promise((resolve,reject) => {
+                        fetch(("https://ikwhbxyhjlfxtgcffhxk.supabase.co/rest/v1/" + urllast[i]),{
+                            "method":"GET",
+                            "headers":{
+                                "apikey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlrd2hieHloamxmeHRnY2ZmaHhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk4MTczMjMsImV4cCI6MjEwNTM5MzMyM30.Ju56fyHy8UJ3ooQWRcMGXDPjleKJ0kdMn0cb4HFJYZg",
+                                "authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlrd2hieHloamxmeHRnY2ZmaHhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk4MTczMjMsImV4cCI6MjEwNTM5MzMyM30.Ju56fyHy8UJ3ooQWRcMGXDPjleKJ0kdMn0cb4HFJYZg",
+                                "content-type":"application/json"
+                            }
+                        })
+                        .then(response => {
+                            if(response.ok == false){
+                                alert("予期せぬエラーが発生しました。");
+                                reject()
+                            }
+                            else {
+                                return response.text();
+                            };
+                        })
+                        //引き継いだ値を一度{array:文字列}でJSON.parseしてから.arrayで取り出すことで無理やり文字列を配列にする
+                        .then(ret => {
+                            ((JSON.parse('{"array":' + ret + '}')).array).forEach(data => {
+                                getdata[("_" + urllast[i])].push(data);
+                            });
+                            resolve();
+                        })
+                        //エラー時処理
+                        .catch(error => {
+                            alert("予期せぬエラーが発生しました：" + error);
+                            reject();
+                        });
+                        }));
+                    };//forのかっこ
+                    Promise.all(check).then(() => {
+                        resolve();
+                    });
+                })
+            };
+            //取得+書き込み処理
+            dataload().then(() => {
+                for(let n = 0;n < 4;n++){
+                    $docdata[n].innerHTML = "<tr><th>日</th><th>一時間目</th><th>二時間目</th><th>三時間目</th><th>四時間目</th><th>五時間目</th><th>六時間目</th></tr>";
+                    getdata["_" + urllast[n]].forEach(data => {
+                        let writen = $docdata[n].insertRow(-1);
+                        let write = document.createElement("th");
+                        write.innerHTML = data.Date;
+                        writen.appendChild(write);
+                        for(let i = 1;i < 7;i++){
+                            writen.insertCell(i).textContent = data[i];
+                        };
+                    });
+                }
+                $docdata[4].innerHTML = "<tr><th>日</th><th>概要</th><th>最終下校時刻</th><th>清掃の有無</th></tr>";
+                getdata["_Same"].forEach(data => {
+                    let writen = $docdata[4].insertRow(-1);
+                    let write = document.createElement("th");
+                    write.innerHTML = data.Date;
+                    writen.appendChild(write);
+                    writen.insertCell(1).textContent = data.Note;
+                    writen.insertCell(2).textContent = data.Cleaning;
+                    writen.insertCell(3).textContent = data.FinalGoHomeTime;
+                })
+                $loading.hidden = true;
+                $info.hidden = false;
+            });
+        </script>
+    </body>
+</html>
