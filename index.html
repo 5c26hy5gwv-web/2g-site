@@ -1584,20 +1584,24 @@ footer {
   function renderHeroDate(){
     let showDate;
     let prefix;
-    if ((Number(scheduledate[0]) == now.getFullYear()) && (Number(scheduledate[1]) == (now.getHours() + 1)) && (Number(scheduledate[2]) == now.getDay())) {
-      showDate = now;
+    let now2 = new Date();
+    if ((Number(scheduledate[0]) == now2.getFullYear()) && (Number(scheduledate[1]) == (now2.getMonth())) && (Number(scheduledate[2]) == now2.getDate())) {
+      showDate = now2;
       prefix = '今日の2';
-    } else {
+    }
+    else{
       showDate = new Date();
-      showDate.setFullYear(Number(scheduledate[0]),Number(scheduledate[1] - 1),Number(scheduledate[2]));
+      showDate.setFullYear(Number(scheduledate[0]),Number(scheduledate[1]) - 1,Number(scheduledate[2]));
       const youbi = ["日","月","火","水","木","金","土"];
       prefix = String(showDate.getMonth() + 1) + "月" + String(showDate.getDate()) + '日' + youbi[showDate.getDay()] + "曜日" + 'の2';
     }
     $('#today-heading').textContent = prefix + currentClass;
-    const y = showDate.getFullYear();
-    const m = String(showDate.getMonth()+1).padStart(2,'0');
-    const d = String(showDate.getDate()).padStart(2,'0');
-    $('#today-label').textContent = formatDateJa(`${y}-${m}-${d}`);
+    const y = now2.getFullYear();
+    const m = String(now2.getMonth() + 1).padStart(2,'0');
+    const d = String(now2.getDate()).padStart(2,'0');
+    const h = String(now2.getHours()).padStart(2,'0');
+    const mi = String(now2.getMinutes()).padStart(2,'0');
+    $('#today-label').textContent = (formatDateJa(`${y}-${m}-${d}`) + " " + h + "時" + mi + "分");
   }
   renderHeroDate();
   (function scheduleMidnightRefresh(){
