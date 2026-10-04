@@ -65,7 +65,16 @@
                         })
                         //引き継いだ値を一度{array:文字列}でJSON.parseしてから.arrayで取り出すことで無理やり文字列を配列にする
                         .then(ret => {
-                            ((JSON.parse('{"array":' + ret + '}')).array).forEach(data => {
+                            let _getdata = JSON.parse('{"array":' + ret + '}').array;
+                            _getdata.sort((a,b) => {
+                                //比較の関数
+                                let aDate = a.Date.split("-");
+                                let bDate = b.Date.split("-");
+                                let aDateall = Number(aDate[0] + aDate[1] + aDate[2]);
+                                let bDateall = Number(bDate[0] + bDate[1] + bDate[2]);
+                                return aDateall - bDateall;
+                            });
+                            _getdata.forEach(data => {
                                 getdata[("_" + urllast[i])].push(data);
                             });
                             resolve();

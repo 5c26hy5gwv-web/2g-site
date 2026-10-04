@@ -1482,7 +1482,16 @@ footer {
       //引き継いだ値を一度{array:文字列}でJSON.parseしてから.arrayで取り出すことで無理やり文字列を配列にする
       .then(ret => {
         let a = false;
-        ((JSON.parse('{"array":' + ret + '}')).array).forEach(data => {
+        let getdata = JSON.parse('{"array":' + ret + '}').array;
+        getdata.sort((a,b) => {
+          //比較の関数
+          let aDate = a.Date.split("-");
+          let bDate = b.Date.split("-");
+          let aDateall = Number(aDate[0] + aDate[1] + aDate[2]);
+          let bDateall = Number(bDate[0] + bDate[1] + bDate[2]);
+          return aDateall - bDateall;
+        });
+        getdata.forEach(data => {
           let datadate = (data.Date).split("-");
           let dateall = Number(datadate[0] + datadate[1] + datadate[2]);
           //指定された日にちより後の日を一日だけ取る
