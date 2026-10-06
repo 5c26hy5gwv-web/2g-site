@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>2年 学年サイト DEMO</title>
+<title>2年 学年サイト</title>
 <meta name="description" content="静岡大学教育学部附属静岡中学校 2年（A/B/C/D組）の学年サイト。学年の予定・テスト範囲・各クラスの目標・委員会連絡・アンケートがひとつにまとまっています。" />
 
 <!-- ============================================================
@@ -19,7 +19,7 @@
      ・today       … 学年共通の一日情報
        └ perClass  … クラス（A/B/C/D）　※ここは入力不要
      ・thisWeek    … 今週の要点（学年共通）
-     ・deadlines   … 直近の締切（target: "all" or "A" or "A,B" などクラス指定可）
+     ・deadlines   … 直近の締切（現在は未使用 / 表示セクションは廃止）
      ・events      … 行事カウントダウン（体育祭・合唱コンなど）
      ・upcoming    … 今後の予定
      ・tests       … テスト範囲（教科ごと・4クラス分まとめ）
@@ -39,8 +39,8 @@
     "siteNameSub": "静岡大学教育学部附属静岡中学校 2年",
     "schoolName": "静岡大学教育学部附属静岡中学校",
     "grade": "2年",
-    "version": "",
-    "updatedAt": ""
+    "version": "Ver.1,0,0",
+    "updatedAt": "2026-10-06"
   },
   "classes": [
     { "id": "A", "name": "A組", "color": "#e5484d", "colorSoft": "#fdecec", "colorInk": "#a01e22", "teacher": "" },
@@ -64,14 +64,7 @@
       "体育祭!!!副学代はいつ決まる？"
     ]
   },
-  "deadlines": [
-    {
-      "date": "2026-08-26",
-      "title": "美術 課題",
-      "note": "「この夏見つけた美しいもの」",
-      "target": "all"
-    }
-  ],
+  "deadlines": [],
   "events": [
     {
       "date": "2026-09-30",
@@ -79,11 +72,16 @@
       "icon": "🏃",
       "target": "all"
     },
-    { "placeholder": true },
+    {
+      "date": "2026-10-14",
+      "title": "附中アリーナ",
+      "icon": "🎉",
+      "target": "all"
+    },
     { "placeholder": true }
   ],
   "upcoming": [
-    { "date": "9/30(水)", "title": "体育祭", "target": "all" }
+    { "date": "10/14(水)", "title": "附中アリーナ", "target": "all" }
   ],
   "tests": {
     "name": "前期末テスト範囲",
@@ -167,18 +165,24 @@
   "forms": {
     "opinion": {
       "title": "意見箱",
-      "when": "サイトや学年への意見・要望を伝えたいとき",
-      "url": "https://docs.google.com/forms/d/e/1FAIpQLSd5qkBAPiNX7OYXFAxGBEELP4qEMGAw58c2ybAV6kwWkO5htA/viewform?usp=header"
+      "when": "サイトや学年への意見・要望を伝えたいとき（クラスごとの送信先）",
+      "byClass": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      }
     },
     "question": {
       "title": "質問フォーム",
       "when": "分からないこと・確認したいことを聞きたいとき（回答はFAQに載ります）",
-      "byClass": {
-        "A": "https://docs.google.com/forms/d/e/1FAIpQLSdNvyGR-xDc3Wj-JMW2fgsPdXv9-6yhcHymdujjnK2Pu2iBCw/viewform?usp=header",
-        "B": "https://docs.google.com/forms/d/e/1FAIpQLSdNvyGR-xDc3Wj-JMW2fgsPdXv9-6yhcHymdujjnK2Pu2iBCw/viewform?usp=header",
-        "C": "https://docs.google.com/forms/d/e/1FAIpQLSdNvyGR-xDc3Wj-JMW2fgsPdXv9-6yhcHymdujjnK2Pu2iBCw/viewform?usp=header",
-        "D": "https://docs.google.com/forms/d/e/1FAIpQLSdNvyGR-xDc3Wj-JMW2fgsPdXv9-6yhcHymdujjnK2Pu2iBCw/viewform?usp=header"
-      }
+      "url": ""
+    },
+    "monitor": {
+      "title": "学代監視ボックス",
+      "when": "2Bの学代がサボってて叩きたいとき",
+      "classes": ["B"],
+      "url": ""
     },
     "feature": {
       "title": "新機能募集",
@@ -200,13 +204,20 @@
     }
   ],
   "policy": [
-    "このサイトは 2年 学年サイト（DEMO） です。掲載情報は運営メンバーが管理しています。",
+    "このサイトは、静岡大学教育学部附属静岡中学校 2年の学年サイトです。掲載している情報は運営メンバーが管理・更新しています。",
+    "掲載内容は確認して載せていますが、急な変更などで実際の予定と異なる場合があります。最終的な連絡は、学校や先生からの連絡で確認してください。",
     "個人が特定される情報（フルネーム・住所・電話番号など）は書き込まない・送らないでください。",
     "誹謗中傷や、他人を傷つける内容の書き込みは削除します。",
-    "サイトの内容は予告なく変更・更新することがあります。最新版は上部のバージョン表記を確認してください。",
-    "困ったこと・問題を見つけたら『意見箱』から運営メンバーに連絡してください。"
+    "サイトの内容は予告なく変更・更新することがあります。最新のバージョンは、右上のバージョン表記と更新履歴で確認してください。",
+    "困ったこと・問題を見つけたら『送る』のフォームから運営メンバーに連絡してください。"
   ],
-  "updates": []
+  "updates": [
+    {
+      "ver": "Ver.1,0,0",
+      "date": "2026-10-06",
+      "text": "2年学年サイトをプレリリースしました（まずは各クラス内のみ公開）。これから少しずつ使いやすいサイトにしていきます。"
+    }
+  ]
 }
 </script>
 
@@ -968,6 +979,7 @@ details.faq .a::before {
 .form-card[data-kind="opinion"] .icon { background: #fbe1e4; color: #9b1e2c; }
 .form-card[data-kind="question"] .icon { background: #e0efff; color: #1e46a3; }
 .form-card[data-kind="feature"] .icon { background: #dff3e4; color: #1f6d43; }
+.form-card[data-kind="monitor"] .icon { background: #fde9c8; color: #8a5f00; }
 .form-card .body { flex: 1; min-width: 0; }
 .form-card .title { font-family: var(--font-display); font-weight: 700; font-size: 16px; margin: 0; }
 .form-card .when { font-size: 12px; color: var(--ink-3); margin-top: 4px; }
@@ -1118,7 +1130,7 @@ footer {
         <span class="brand-sub" id="school-name">静岡大学教育学部附属静岡中学校 2年</span>
       </div>
     </div>
-    <span class="ver-tag" id="ver-tag">DEMO</span>
+    <span class="ver-tag" id="ver-tag">Ver.1,0,0</span>
   </div>
   <div class="search-wrap">
     <input class="search" id="global-search" type="search" placeholder="サイト内を検索（例:テスト範囲、意見箱、体育祭）" aria-label="サイト内検索" />
@@ -1199,16 +1211,6 @@ footer {
       <span class="rule"></span>
     </div>
     <div class="countdowns" id="countdowns"></div>
-  </section>
-
-  <!-- ===================== Deadlines ===================== -->
-  <section id="deadlines" data-screen-label="03 締切">
-    <div class="section-head">
-      <h2>直近の締切</h2>
-      <span class="hint">忘れちゃダメなやつ</span>
-      <span class="rule"></span>
-    </div>
-    <div class="deadlines" id="deadlines-list"></div>
   </section>
 
   <!-- ===================== Week ===================== -->
@@ -1325,6 +1327,7 @@ footer {
           <div class="body">
             <p class="title">意見箱</p>
             <p class="when" id="form-opinion-when"></p>
+            <span class="cls-note" id="form-opinion-cls"></span>
           </div>
           <span class="arrow">→</span>
         </a>
@@ -1336,7 +1339,6 @@ footer {
           <div class="body">
             <p class="title">質問フォーム</p>
             <p class="when" id="form-question-when"></p>
-            <span class="cls-note" id="form-question-cls"></span>
           </div>
           <span class="arrow">→</span>
         </a>
@@ -1348,6 +1350,17 @@ footer {
           <div class="body">
             <p class="title">新機能募集</p>
             <p class="when" id="form-feature-when"></p>
+          </div>
+          <span class="arrow">→</span>
+        </a>
+
+        <a class="form-card" data-kind="monitor" id="form-monitor" href="#" style="display:none">
+          <span class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="2.5"/></svg>
+          </span>
+          <div class="body">
+            <p class="title">学代監視ボックス</p>
+            <p class="when" id="form-monitor-when"></p>
           </div>
           <span class="arrow">→</span>
         </a>
@@ -1393,7 +1406,7 @@ footer {
 </main>
 
 <footer>
-  <div>DEMO</div>
+  <div>2年 学年サイト Ver.1,0,0</div>
 </footer>
 
 <!-- ===================== Bottom Tab Bar ===================== -->
@@ -1542,7 +1555,7 @@ footer {
   // ---- Meta
   $('#school-name').textContent = `${DATA.meta.schoolName} ${DATA.meta.grade}`;
   if (DATA.meta.siteName) $('#site-title').textContent = DATA.meta.siteName;
-  // DEMOバッジは固定。meta.version が入っていればそちらを優先
+  // バージョンバッジ。meta.version が入っていればそちらを優先
   if (DATA.meta.version) $('#ver-tag').textContent = DATA.meta.version;
 
   // ---- CSS variables from classes JSON (色を JSON から上書き可能に)
@@ -1722,6 +1735,7 @@ footer {
   // ---- Deadlines
   function renderDeadlines() {
     const el = $('#deadlines-list');
+    if (!el) return; // 締切セクションは廃止（要素がなければ何もしない）
     el.innerHTML = '';
     const nowRef = stripTime(new Date());
     DATA.deadlines.forEach(d => {
@@ -1950,17 +1964,28 @@ footer {
 
   // ---- Forms (質問フォームは選択中クラスで切替)
   function renderForms() {
-    $('#form-opinion').href = DATA.forms.opinion.url;
+    // 意見箱: クラスごとの送信先
+    const oByClass = DATA.forms.opinion.byClass || {};
+    const oUrl = oByClass[currentClass] || '';
+    $('#form-opinion').href = oUrl || '#';
     $('#form-opinion-when').textContent = DATA.forms.opinion.when;
+    $('#form-opinion-cls').textContent = `送信先:2年${currentClass}組`;
 
-    const qByClass = DATA.forms.question.byClass || {};
-    const qUrl = qByClass[currentClass] || Object.values(qByClass)[0] || '#';
-    $('#form-question').href = qUrl;
+    // 質問フォーム: 学年全体で共通
+    $('#form-question').href = DATA.forms.question.url || '#';
     $('#form-question-when').textContent = DATA.forms.question.when;
-    $('#form-question-cls').textContent = `送信先:2年${currentClass}組`;
 
     $('#form-feature').href = DATA.forms.feature.url;
     $('#form-feature-when').textContent = DATA.forms.feature.when;
+
+    // 学代監視ボックス: 対象クラス（B組）にだけ表示
+    const mon = DATA.forms.monitor;
+    if (mon) {
+      const el = $('#form-monitor');
+      el.style.display = (mon.classes || []).includes(currentClass) ? '' : 'none';
+      el.href = mon.url || '#';
+      $('#form-monitor-when').textContent = mon.when;
+    }
   }
   renderForms();
 
@@ -2256,6 +2281,7 @@ footer {
 .tw-hint { color: var(--ink-3); font-size: 12px; padding-top: 10px; line-height: 1.5; }
 </style>
 
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","spa":2}' crossorigin="anonymous"></script>
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","spa":2}' crossorigin="anonymous"></script>
 </body>
 </html>
