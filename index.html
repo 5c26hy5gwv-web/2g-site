@@ -29,6 +29,7 @@
      ・faqs        … FAQ
      ・forms       … 意見箱・質問フォーム（クラス別）・新機能募集
      ・others      … その他リンク
+     ・games       … 数学アーケード（Scratchゲーム。url を入れればカードが開く。comingSoon:true で“制作中”）
      ・updates     … 更新履歴
      ・policy      … サイトポリシー
      ============================================================ -->
@@ -39,8 +40,8 @@
     "siteNameSub": "静岡大学教育学部附属静岡中学校 2年",
     "schoolName": "静岡大学教育学部附属静岡中学校",
     "grade": "2年",
-    "version": "Ver.1,1,0",
-    "updatedAt": "2026-10-18"
+    "version": "Ver.1,3,0",
+    "updatedAt": "2026-10-25"
   },
   "classes": [
     { "id": "A", "name": "A組", "color": "#e5484d", "colorSoft": "#fdecec", "colorInk": "#a01e22", "teacher": "" },
@@ -153,9 +154,29 @@
       "a": "はい。下のタブから予定・テスト・FAQ・送るにすぐ移動できます。スマホ最優先で作っています。"
     },
     {
+      "category": "サイト",
+      "q": "検索の使い方",
+      "a": "サイト上部の検索欄に言葉を入れると、候補が下に表示されます。候補を押すとその場所へ移動します。「時間割」「テスト範囲」「文化祭」「ゲーム」など、1つの単語で探せます。上下キーで選んでEnterでも移動できます。"
+    },
+    {
       "category": "予定",
       "q": "他のクラスの時間割も見られる？",
       "a": "見られます。ヒーロー（一番上）のA/B/C/Dタブで切り替えてください。"
+    },
+    {
+      "category": "予定",
+      "q": "行事カウントダウンに後期末テストと学年旅行増やせば？",
+      "a": "それぞれの日が分かり次第追加します。"
+    },
+    {
+      "category": "学校生活",
+      "q": "留年する方法はありますか？",
+      "a": "ありません。"
+    },
+    {
+      "category": "送る",
+      "q": "意見箱ってどうやったら使えるん？",
+      "a": "意見箱は現在2Bのみが対応しています。各クラスの学代からURLを入手し次第使えるようになります。"
     },
     {
       "category": "テスト",
@@ -209,6 +230,51 @@
       "url": "#site-policy"
     }
   ],
+  "games": {
+    "note": "数学係が作ったScratchのゲームです。カードを押すとScratchのページが別タブで開きます。",
+    "items": [
+      {
+        "title": "15puzzle",
+        "desc": "1〜15のタイルを1マスずつ動かして、番号順に並べるパズル。",
+        "tag": "パズル",
+        "icon": "🔢",
+        "color": "#2f6fed",
+        "url": "https://scratch.mit.edu/projects/1362334943/"
+      },
+      {
+        "title": "Lights Out",
+        "desc": "ライトを押すと、押した場所と上下左右が反転。全部消灯させよう。",
+        "tag": "パズル",
+        "icon": "💡",
+        "color": "#e8a400",
+        "url": "https://scratch.mit.edu/projects/1363802202/"
+      },
+      {
+        "title": "Gate Number",
+        "desc": "左右のゲートを選んで数字を変えながら進み、最後のボスを倒す。",
+        "tag": "計算",
+        "icon": "🚪",
+        "color": "#2f9e5c",
+        "url": "https://scratch.mit.edu/projects/1383076141/"
+      },
+      {
+        "title": "Infinity Tower",
+        "desc": "式の答えを入力して上の階へ。何階まで登れるか挑戦。",
+        "tag": "計算",
+        "icon": "🗼",
+        "color": "#7c5cff",
+        "url": "https://scratch.mit.edu/projects/1384116936/"
+      },
+      {
+        "title": "3n or Not",
+        "desc": "数学係が制作中。公開されたらここに追加します。",
+        "tag": "制作中",
+        "icon": "🧮",
+        "color": "#8b93a6",
+        "comingSoon": true
+      }
+    ]
+  },
   "policy": [
     "このサイトは、静岡大学教育学部附属静岡中学校 2年の学年サイトです。掲載している情報は運営メンバーが管理・更新しています。",
     "掲載内容は確認して載せていますが、急な変更などで実際の予定と異なる場合があります。最終的な連絡は、学校や先生からの連絡で確認してください。",
@@ -218,6 +284,16 @@
     "困ったこと・問題を見つけたら『送る』のフォームから運営メンバーに連絡してください。"
   ],
   "updates": [
+    {
+      "ver": "Ver.1,3,0",
+      "date": "2026-10-25",
+      "text": "FAQを4件追加しました（検索の使い方・行事カウントダウン・留年・意見箱）。あわせてサイト内検索を使いやすくしました。検索欄に入力すると候補が出て、押すとその場所へ移動します。"
+    },
+    {
+      "ver": "Ver.1,2,0",
+      "date": "2026-10-25",
+      "text": "数学アーケードを追加しました。数学係が作ったScratchのゲーム（15puzzle・Lights Out・Gate Number・Infinity Tower）をサイトから遊べます。3n or Notは制作中です。"
+    },
     {
       "ver": "Ver.1,1,0",
       "date": "2026-10-18",
@@ -908,8 +984,7 @@ details.subject .perclass .row .c {
 /* --------- FAQ --------- */
 .faq-cats {
   display: flex; gap: 6px; overflow-x: auto; margin: -4px 0 12px;
-  padding: 4px 0;
-}
+  padding: 4px 0; flex-wrap: wrap; }
 .faq-cats button {
   border: 1px solid var(--line);
   background: var(--surface);
@@ -1027,6 +1102,91 @@ details.faq .a::before {
 .others-list .desc { font-size: 12px; color: var(--ink-3); margin-top: 2px; }
 .others-list .arrow { margin-left: auto; color: var(--ink-3); }
 
+/* --------- Site search --------- */
+.search-wrap { position: relative; }
+.search-panel {
+  position: absolute; left: 18px; right: 18px; top: calc(100% - 6px);
+  z-index: 60;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: var(--shadow-md);
+  overflow-y: auto;
+  max-height: 60vh;
+}
+.search-panel[hidden] { display: none; }
+.search-panel .sp-item {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--line-2);
+  cursor: pointer;
+}
+.search-panel .sp-item:last-child { border-bottom: 0; }
+.search-panel .sp-item.is-active { background: var(--accent-soft); }
+.search-panel .sp-t { font-weight: 700; font-size: 13px; line-height: 1.4; }
+.search-panel .sp-k {
+  font-size: 10px; font-weight: 500;
+  color: var(--ink-3);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0 6px;
+  margin-left: 6px;
+  white-space: nowrap;
+}
+.search-panel .sp-d { font-size: 11px; color: var(--ink-3); margin-top: 2px; line-height: 1.5; }
+.search-panel .sp-empty { padding: 16px 14px; font-size: 12px; color: var(--ink-3); text-align: center; }
+
+/* --------- Math games (数学アーケード) --------- */
+.game-grid { display: grid; gap: 10px; grid-template-columns: 1fr; }
+.game-card {
+  display: flex; flex-direction: column; gap: 9px;
+  padding: 14px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  color: var(--ink);
+  text-decoration: none;
+  transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+}
+.game-card:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in oklab, var(--g, var(--accent)) 45%, var(--line));
+  box-shadow: var(--shadow-md);
+}
+.game-card .g-top { display: flex; align-items: center; gap: 10px; }
+.game-card .g-icon {
+  width: 38px; height: 38px; border-radius: 11px;
+  display: grid; place-items: center;
+  font-size: 19px; line-height: 1; flex-shrink: 0;
+  background: color-mix(in oklab, var(--g, var(--accent)) 14%, var(--surface));
+}
+.game-card .g-title {
+  font-family: var(--font-display); font-weight: 700; font-size: 15px;
+  line-height: 1.25; word-break: break-word;
+}
+.game-card .g-desc { font-size: 12px; color: var(--ink-3); line-height: 1.55; }
+.game-card .g-foot {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 8px; margin-top: auto; font-size: 11px;
+}
+.game-card .g-tag {
+  color: var(--ink-3);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 1px 8px;
+  white-space: nowrap;
+}
+.game-card .g-go { font-weight: 700; color: var(--g, var(--accent)); white-space: nowrap; }
+.game-card.is-soon {
+  opacity: .65;
+  border-style: dashed;
+  cursor: default;
+  pointer-events: none;
+}
+.game-card.is-soon .g-go { color: var(--ink-3); }
+@media (min-width: 560px) {
+  .game-grid { grid-template-columns: 1fr 1fr; }
+}
+
 /* --------- Updates --------- */
 .updates { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
 .updates li {
@@ -1141,10 +1301,11 @@ footer {
         <span class="brand-sub" id="school-name">静岡大学教育学部附属静岡中学校 2年</span>
       </div>
     </div>
-    <span class="ver-tag" id="ver-tag">Ver.1,1,0</span>
+    <span class="ver-tag" id="ver-tag">Ver.1,3,0</span>
   </div>
   <div class="search-wrap">
-    <input class="search" id="global-search" type="search" placeholder="サイト内を検索（例:テスト範囲、意見箱、体育祭）" aria-label="サイト内検索" />
+    <input class="search" id="global-search" type="search" placeholder="サイト内を検索（例:時間割、テスト範囲、文化祭）" aria-label="サイト内検索" autocomplete="off" />
+    <div class="search-panel" id="search-panel" hidden></div>
   </div>
 </header>
 
@@ -1380,6 +1541,19 @@ footer {
     </div>
   </section>
 
+  <!-- ===================== Math Games ===================== -->
+  <section id="math-games" data-screen-label="12 数学アーケード">
+    <div class="section-head">
+      <h2>数学アーケード</h2>
+      <span class="hint">数学係より</span>
+      <span class="rule"></span>
+    </div>
+    <div class="card">
+      <p class="can-do">このページでできること:数学係が作ったScratchのゲームで遊ぶ。カードを押すとScratchのページが別タブで開きます。</p>
+      <div class="game-grid" id="game-list"></div>
+    </div>
+  </section>
+
   <!-- ===================== Others ===================== -->
   <section id="others" data-screen-label="12 その他">
     <div class="section-head">
@@ -1417,7 +1591,7 @@ footer {
 </main>
 
 <footer>
-  <div>2年 学年サイト Ver.1,1,0</div>
+  <div>2年 学年サイト Ver.1,3,0</div>
 </footer>
 
 <!-- ===================== Bottom Tab Bar ===================== -->
@@ -1971,7 +2145,106 @@ footer {
     });
   }
   renderFaqs();
-  $('#global-search').addEventListener('input', () => { renderFaqs(); });
+
+  // ---- サイト内検索（入力すると候補が出て、押すとその場所へ移動）
+  (function setupSearch() {
+    const input = $('#global-search');
+    const panel = $('#search-panel');
+    if (!input || !panel) return;
+
+    const IDX = [];
+    const push = (title, desc, kind, act, kw) => IDX.push({
+      title, desc: desc || '', kind, act,
+      hay: (title + ' ' + (desc || '') + ' ' + (kw || '')).toLowerCase()
+    });
+
+    const SECTIONS = [
+      ['today',       '今日・明日の時間割',       '時間割 清掃 掃除 最終下校 下校時刻 完全下校 一日情報 今日 明日 何限'],
+      ['events-cd',   '行事カウントダウン',       '行事 体育祭 文化祭 学年旅行 カウントダウン 何日後'],
+      ['week',        '今週の要点',               '今週 要点 ひとこと'],
+      ['upcoming',    '今後の予定',               '予定 今後 スケジュール'],
+      ['tests',       'テスト範囲',               'テスト 範囲 科目 教科 期末 中間 前期末 後期末'],
+      ['goals',       '各クラスの目標',           '目標 クラス'],
+      ['committees',  '係・委員会 連絡板',        '委員会 係 連絡 締切'],
+      ['surveys',     'アンケート',               'アンケート 回答 結果 フォーム'],
+      ['faq',         '質問と答え',               '質問 答え FAQ よくある'],
+      ['send',        '送る（フォーム）',         '意見箱 質問 新機能 送る 要望 アイデア 連絡'],
+      ['math-games',  '数学アーケード（ゲーム）', 'ゲーム 数学 Scratch 遊ぶ パズル 15puzzle Lights Gate Infinity 3n'],
+      ['others',      'その他',                   'その他 リンク ポータル'],
+      ['updates',     '更新履歴',                 '更新 履歴 バージョン ver'],
+      ['site-policy', 'サイトポリシー',           'ポリシー ルール 使い方 きまり']
+    ];
+    SECTIONS.forEach(([id, name, kw]) => push(name, '', 'ページ', { type: 'section', id }, kw));
+
+    (DATA.classes || []).forEach(c =>
+      push('2年' + c.id + '組の時間割', 'クラスを切り替えて表示します', 'クラス',
+           { type: 'class', id: c.id }, c.id + '組 ' + (c.name || '')));
+    ((DATA.tests && DATA.tests.subjects) || []).forEach(x =>
+      push('テスト範囲:' + x.subject, String(x.range || '').slice(0, 60), 'テスト',
+           { type: 'section', id: 'tests' }, x.subject + ' ' + (x.teacher || '')));
+    (DATA.events || []).forEach(e => {
+      if (e.date && !e.placeholder) push('行事:' + e.title, formatDateJa(e.date), '行事',
+           { type: 'section', id: 'events-cd' }, e.title + ' ' + (e.icon || ''));
+    });
+    (DATA.upcoming || []).forEach(u =>
+      push('予定:' + u.title, u.date, '予定', { type: 'section', id: 'upcoming' }, u.title));
+    ((DATA.games && DATA.games.items) || []).forEach(g =>
+      push('ゲーム:' + g.title, g.desc || '', 'ゲーム', { type: 'section', id: 'math-games' }, g.tag || ''));
+    (DATA.faqs || []).forEach(f =>
+      push('Q.' + f.q, f.a, 'FAQ', { type: 'section', id: 'faq', q: f.q }, f.category));
+
+    let active = -1, hits = [];
+
+    function close() { panel.hidden = true; panel.innerHTML = ''; active = -1; }
+    function go(r) {
+      close();
+      if (r.act.type === 'class') setCurrentClass(r.act.id);
+      const el = document.getElementById(r.act.id);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (r.act.q) {
+        const d = $$('#faqs details.faq').find(x =>
+          ((x.querySelector('summary span') || {}).textContent || '') === r.act.q);
+        if (d) { d.open = true; setTimeout(() => d.scrollIntoView({ behavior: 'smooth', block: 'center' }), 350); }
+      }
+    }
+    function mark() {
+      $$('.sp-item', panel).forEach(el =>
+        el.classList.toggle('is-active', Number(el.dataset.i) === active));
+    }
+    function render() {
+      const raw = (input.value || '').trim();
+      const q = raw.toLowerCase();
+      if (!q) { close(); return; }
+      const words = q.split(/\s+/).filter(Boolean);
+      hits = IDX.filter(it => words.every(w => it.hay.indexOf(w) !== -1)).slice(0, 8);
+      panel.hidden = false;
+      if (!hits.length) {
+        panel.innerHTML = '<div class="sp-empty">「' + escapeHtml(raw) + '」に一致する項目はありません</div>';
+        active = -1; return;
+      }
+      panel.innerHTML = hits.map((h, i) =>
+        '<div class="sp-item' + (i === 0 ? ' is-active' : '') + '" data-i="' + i + '">' +
+          '<div class="sp-t">' + escapeHtml(h.title) + '<span class="sp-k">' + escapeHtml(h.kind) + '</span></div>' +
+          (h.desc ? '<div class="sp-d">' + escapeHtml(h.desc.slice(0, 70)) + '</div>' : '') +
+        '</div>').join('');
+      active = 0;
+      $$('.sp-item', panel).forEach(el => {
+        el.addEventListener('click', () => go(hits[Number(el.dataset.i)]));
+        el.addEventListener('mouseenter', () => { active = Number(el.dataset.i); mark(); });
+      });
+    }
+
+    input.addEventListener('input', () => { renderFaqs(); render(); });
+    input.addEventListener('focus', () => { if ((input.value || '').trim()) render(); });
+    input.addEventListener('keydown', e => {
+      if (panel.hidden) return;
+      if (e.key === 'ArrowDown') { e.preventDefault(); active = Math.min(active + 1, hits.length - 1); mark(); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); active = Math.max(active - 1, 0); mark(); }
+      else if (e.key === 'Enter') { e.preventDefault(); if (hits[active]) go(hits[active]); }
+      else if (e.key === 'Escape') { close(); }
+    });
+    document.addEventListener('click', e => { if (!e.target.closest('.search-wrap')) close(); });
+  })();
 
   // ---- Forms (質問フォームは選択中クラスで切替)
   function renderForms() {
@@ -1999,6 +2272,36 @@ footer {
     }
   }
   renderForms();
+
+  // ---- Math games（数学アーケード）
+  (function renderGames() {
+    const el = $('#game-list');
+    if (!el) return;
+    const games = (DATA.games && DATA.games.items) || [];
+    el.innerHTML = '';
+    games.forEach(g => {
+      const soon = !!g.comingSoon || !g.url;
+      const node = document.createElement(soon ? 'div' : 'a');
+      node.className = 'game-card' + (soon ? ' is-soon' : '');
+      if (!soon) {
+        node.href = g.url;
+        node.target = '_blank';
+        node.rel = 'noopener noreferrer';
+      }
+      if (g.color) node.style.setProperty('--g', g.color);
+      node.innerHTML = `
+        <div class="g-top">
+          <span class="g-icon">${g.icon || '\u{1F3AE}'}</span>
+          <span class="g-title">${escapeHtml(g.title)}</span>
+        </div>
+        <div class="g-desc">${escapeHtml(g.desc || '')}</div>
+        <div class="g-foot">
+          <span class="g-tag">${escapeHtml(g.tag || '')}</span>
+          <span class="g-go">${soon ? '準備中' : 'あそぶ →'}</span>
+        </div>`;
+      el.appendChild(node);
+    });
+  })();
 
   // ---- Others
   const othersEl = $('#others-list');
@@ -2294,6 +2597,7 @@ footer {
 
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","spa":2}' crossorigin="anonymous"></script>
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","spa":2}' crossorigin="anonymous"></script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","spa":2}' crossorigin="anonymous"></script>
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","spa":2}' crossorigin="anonymous"></script>
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","spa":2}' crossorigin="anonymous"></script>
 </body>
