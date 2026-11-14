@@ -1624,7 +1624,7 @@ footer {
 
 <script>
   let isrendertoday = true;
-  let scheduledate;
+  let scheduledate = [undefined,undefined,undefined];
   let DatasFromDB = [undefined,undefined,undefined,undefined,undefined];
   let now = new Date();
 ///ここから特殊処理(ここになんか問題あったら2B07まで)///
@@ -1638,6 +1638,16 @@ footer {
     };
 
   function DataLoadFromDB(){
+    let allfetch = [];
+    //書くのが今日なら見せるのは昨日
+    let searchdate = new Date();
+    if(isrendertoday == true){
+      searchdate.setDate(now.getDate() - 1);
+    }
+    else{
+      searchdate.setDate(now.getDate());
+    }
+    let searchdateall = (String(searchdate.getFullYear()).padStart(4,"0") + String(searchdate.getMonth() + 1).padStart(2,"0") + String(searchdate.getDate()).padStart(2,"0"));
     return new Promise((resolve,reject) => {
     let first = new Promise((resolve,reject) => {
       fetch(("https://ikwhbxyhjlfxtgcffhxk.supabase.co/rest/v1/Same"),{
@@ -1676,7 +1686,10 @@ footer {
           let dateall = Number(datadate[0] + datadate[1] + datadate[2]);
           //指定された日にちより後の日を一日だけ取る
           if((dateall > searchdateall) && (a == false)){
-            DatasFromDB[i] = data;
+            scheduledate[0] = datadate[0];
+            scheduledate[1] = datadate[1];
+            scheduledate[2] = datadate[2];
+            DatasFromDB[4] = data;
             returnvalue = data.Date;
             a = true;
           };
@@ -1725,15 +1738,10 @@ footer {
           let bDateall = Number(bDate[0] + bDate[1] + bDate[2]);
           return aDateall - bDateall;
         });
-        getdata.forEach(data => {
-          let datadate = (data.Date).split("-");
-          let dateall = Number(datadate[0] + datadate[1] + datadate[2]);
-          //指定された日にちより後の日を一日だけ取る
-          if((dateall > searchdateall) && (a == false)){
-            DatasFromDB[i] = data;
-            a = true;
-          };
-        });
+        let datadate = (getdata[0].Date).split("-");
+        let dateall = Number(datadate[0] + datadate[1] + datadate[2]);
+        DatasFromDB[i] = getdata[0];
+        a = true;
         resolve();
       })
       //エラー時処理
