@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>2年 学年サイト</title>
 <meta name="description" content="静岡大学教育学部附属静岡中学校 2年（A/B/C/D組）の学年サイト。学年の予定・テスト範囲・各クラスの目標・委員会連絡・アンケートがひとつにまとまっています。" />
+<meta name="google-site-verification" content="ayqbZrIefL5TVbl06z3j6cASRE9jHxUzJuYzGn-v_dI" />
 
 <!-- ============================================================
      🛠 更新する人へ / How to update
@@ -1279,12 +1280,18 @@ footer {
   .tabbar { display: none; }
   .tweaks-btn { bottom: 20px; }
 }
+#background{
+  top: 0;
+  left: 0;
+  position: fixed;
+  pointer-events: none;
+}
 
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 :target > .section-head h2 { color: var(--accent); transition: color .3s; }
 </style>
 </head>
-<body data-theme="light">
+<body data-theme="light" back="true">
 
 <!-- ===================== Header ===================== -->
 <header class="app-header" data-screen-label="Header">
@@ -1306,6 +1313,7 @@ footer {
 
 <main>
 
+  <canvas id="background"></canvas>
   <!-- ===================== Class Tabs ===================== -->
   <div class="class-tabs" id="class-tabs" role="tablist" aria-label="クラス切替">
     <!-- 動的生成 -->
@@ -1624,7 +1632,7 @@ footer {
 
 <script>
   let isrendertoday = true;
-  let scheduledate;
+  let scheduledate = [undefined,undefined,undefined];
   let DatasFromDB = [undefined,undefined,undefined,undefined,undefined];
   let now = new Date();
 ///ここから特殊処理(ここになんか問題あったら2B07まで)///
@@ -1636,11 +1644,85 @@ footer {
     else{
       isrendertoday = false;
     };
+  let time;
+
+  /////背景の処理/////
+  let pieceback = [];
+  let ScrWidth;
+  let ScrHeight;
+  let countForBG = 0;
+  const backgroundcanvas = document.getElementById("background");
+  const ctx = backgroundcanvas.getContext("2d");
+  class back{
+    constructor(x,dir,size){
+      this.speed = Math.random() + 0.8;
+      this.dir = dir;
+      this.x = x;
+      this.y = 0;
+      this.size = size * this.speed;
+      this.live = true;
+    }
+    proto(spt){
+      ctx.translate(this.x + (picturebackfall.width * this.size / 2),this.y - (picturebackfall.height * this.size / 2));
+      ctx.rotate(this.dir);
+      ctx.drawImage(picturebackfall,0,0,(picturebackfall.width * this.size),(picturebackfall.height * this.size));
+      ctx.rotate(-this.dir);
+      ctx.translate(-(picturebackfall.width * this.size / 2) - this.x,(picturebackfall.height * this.size / 2) - this.y);
+      //次回用動作
+      this.y += (this.speed * 0.5 * spt);
+      this.x += 0.05 * spt;
+      this.dir += (0.0001 * Math.PI * spt);
+      //範囲外だったら消す
+      if(this.y > ScrHeight)this.live = false;
+    }
+  }
+  let picturebackfall = new Image();
+  picturebackfall.src = "images/snow.png";
+  function background(t){
+    let spendtime = t - time;
+    ScrWidth = window.innerWidth;
+    ScrHeight = window.innerHeight;
+    backgroundcanvas.width = ScrWidth;
+    backgroundcanvas.height = ScrHeight;
+    //破壊
+    ctx.clearRect(0,0,ScrWidth,ScrHeight);
+    if(document.body.getAttribute("back") == "true"){
+    //生成
+    if(countForBG % 1 == 0){
+      pieceback.push(new back(Math.floor(Math.random() * (ScrWidth + 20) - 20),(Math.random() * 3.14),0.007));
+    }
+    //処理
+    let delloc = [];
+    pieceback.forEach(obj => {
+      obj.proto(spendtime);
+      if(obj.live == false || document.body.getAttribute("data-theme") == "light"){
+        delloc.push(pieceback.indexOf(obj));
+      }
+    });
+    delloc.sort((a,b) => a - b);
+    for(let i = 0;i < delloc.length;i++){
+      pieceback.splice(delloc[i] - i,1);
+    }
+    delloc.splice(0,delloc.length);
+    }
+    else{
+      pieceback.splice(0,pieceback.length);
+    }
+    //終わり
+    time = t;
+    countForBG++;
+    requestAnimationFrame(background);
+  }
+  picturebackfall.decode().then(() => {
+    requestAnimationFrame((t) => {
+      time = t;
+      requestAnimationFrame(background);
+    })
+  })
+  /////背景の処理/////
 
   function DataLoadFromDB(){
-    return new Promise((resolve,reject) => {
     let allfetch = [];
-    const urllast = ["2A","2B","2C","2D","Same"];
     //書くのが今日なら見せるのは昨日
     let searchdate = new Date();
     if(isrendertoday == true){
@@ -1650,11 +1732,67 @@ footer {
       searchdate.setDate(now.getDate());
     }
     let searchdateall = (String(searchdate.getFullYear()).padStart(4,"0") + String(searchdate.getMonth() + 1).padStart(2,"0") + String(searchdate.getDate()).padStart(2,"0"));
-
+    return new Promise((resolve,reject) => {
+    let first = new Promise((resolve,reject) => {
+      fetch(("https://ikwhbxyhjlfxtgcffhxk.supabase.co/rest/v1/Same"),{
+        "method":"GET",
+        "headers":{
+          "apikey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlrd2hieHloamxmeHRnY2ZmaHhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk4MTczMjMsImV4cCI6MjEwNTM5MzMyM30.Ju56fyHy8UJ3ooQWRcMGXDPjleKJ0kdMn0cb4HFJYZg",
+          "authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlrd2hieHloamxmeHRnY2ZmaHhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk4MTczMjMsImV4cCI6MjEwNTM5MzMyM30.Ju56fyHy8UJ3ooQWRcMGXDPjleKJ0kdMn0cb4HFJYZg",
+          "content-type":"application/json"
+        }
+      })
+      //まず、正常にデータが渡されてたら値を引き継ぐ
+      .then(response => {
+        if(response.ok == false){
+          alert("予期せぬエラーが発生しました。");
+          reject()
+        }
+        else {
+          return response.text();
+        };
+      })
+      //引き継いだ値を一度{array:文字列}でJSON.parseしてから.arrayで取り出すことで無理やり文字列を配列にする
+      .then(ret => {
+        let a = false;
+        let getdata = JSON.parse('{"array":' + ret + '}').array;
+        getdata.sort((a,b) => {
+          //比較の関数
+          let aDate = a.Date.split("-");
+          let bDate = b.Date.split("-");
+          let aDateall = Number(aDate[0] + aDate[1] + aDate[2]);
+          let bDateall = Number(bDate[0] + bDate[1] + bDate[2]);
+          return aDateall - bDateall;
+      });
+      let returnvalue;
+      getdata.forEach(data => {
+          let datadate = (data.Date).split("-");
+          let dateall = Number(datadate[0] + datadate[1] + datadate[2]);
+          //指定された日にちより後の日を一日だけ取る
+          if((dateall > searchdateall) && (a == false)){
+            scheduledate[0] = datadate[0];
+            scheduledate[1] = datadate[1];
+            scheduledate[2] = datadate[2];
+            DatasFromDB[4] = data;
+            returnvalue = data.Date;
+            a = true;
+          };
+        });
+        resolve(returnvalue);
+      })
+      //エラー時処理
+      .catch(error => {
+        alert("予期せぬエラーが発生しました：" + error);
+        reject();
+      });
+    });
+    first.then(search => {
+    let allfetch = [];
+    const urllast = ["2A","2B","2C","2D"];
     //取得処理
-    for(let i = 0;i < 5;i++){
+    for(let i = 0;i < 4;i++){
     allfetch.push(new Promise((resolve,reject) => {
-        fetch(("https://ikwhbxyhjlfxtgcffhxk.supabase.co/rest/v1/" + urllast[i]),{
+        fetch(("https://ikwhbxyhjlfxtgcffhxk.supabase.co/rest/v1/" + urllast[i] + "?Date=eq." + search),{
         "method":"GET",
         "headers":{
           "apikey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlrd2hieHloamxmeHRnY2ZmaHhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk4MTczMjMsImV4cCI6MjEwNTM5MzMyM30.Ju56fyHy8UJ3ooQWRcMGXDPjleKJ0kdMn0cb4HFJYZg",
@@ -1684,18 +1822,10 @@ footer {
           let bDateall = Number(bDate[0] + bDate[1] + bDate[2]);
           return aDateall - bDateall;
         });
-        getdata.forEach(data => {
-          let datadate = (data.Date).split("-");
-          let dateall = Number(datadate[0] + datadate[1] + datadate[2]);
-          //指定された日にちより後の日を一日だけ取る
-          if((dateall > searchdateall) && (a == false)){
-            DatasFromDB[i] = data;
-            if(i == 4){
-                scheduledate = [datadate[0],datadate[1],datadate[2]];
-            }
-            a = true;
-          };
-        });
+        let datadate = (getdata[0].Date).split("-");
+        let dateall = Number(datadate[0] + datadate[1] + datadate[2]);
+        DatasFromDB[i] = getdata[0];
+        a = true;
         resolve();
       })
       //エラー時処理
@@ -1707,7 +1837,7 @@ footer {
     }
     Promise.all(allfetch).then(() => {resolve();})
   })
-  }
+  })}
   DataLoadFromDB().then(() => {
 
 ///ここまで特殊処理///
@@ -2434,6 +2564,7 @@ footer {
   const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
     "myClass": "B",
     "dark": false,
+    "back": true,
     "showTabbar": true
   }/*EDITMODE-END*/;
 
@@ -2448,6 +2579,7 @@ footer {
 
   function apply() {
     document.body.setAttribute('data-theme', state.dark ? 'dark' : 'light');
+    document.body.setAttribute("back", state.back ? "true":"false");
     document.getElementById('tabbar').style.display = state.showTabbar ? '' : 'none';
     document.body.style.paddingBottom = state.showTabbar ? '' : '32px';
     if (window.__2g && window.__2g.getMyClass && window.__2g.getMyClass() !== state.myClass) {
@@ -2486,6 +2618,13 @@ footer {
               </label>
             </div>
             <div class="tw-row">
+              <label>背景の演出</label>
+              <label class="tw-toggle">
+                <input type="checkbox" id="tw-back" ${state.back ? 'checked':''}>
+                <span></span>
+              </label>
+            </div>
+            <div class="tw-row">
               <label>下部タブバーを表示</label>
               <label class="tw-toggle">
                 <input type="checkbox" id="tw-tab" ${state.showTabbar ? 'checked':''}>
@@ -2511,6 +2650,7 @@ footer {
       };
     });
     root.querySelector('#tw-dark').onchange = e => { state.dark = e.target.checked; save(); apply(); };
+    root.querySelector('#tw-back').onchange = e => { state.back = e.target.checked; save(); apply(); };
     root.querySelector('#tw-tab').onchange = e => { state.showTabbar = e.target.checked; save(); apply(); };
   }
   function closePanel() { root.innerHTML = ''; }
