@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>2年 学年サイト</title>
 <meta name="description" content="静岡大学教育学部附属静岡中学校 2年（A/B/C/D組）の学年サイト。学年の予定・テスト範囲・各クラスの目標・委員会連絡・アンケートがひとつにまとまっています。" />
+<meta name="google-site-verification" content="ayqbZrIefL5TVbl06z3j6cASRE9jHxUzJuYzGn-v_dI" />
 
 <!-- ============================================================
      🛠 更新する人へ / How to update
@@ -1279,12 +1280,18 @@ footer {
   .tabbar { display: none; }
   .tweaks-btn { bottom: 20px; }
 }
+#background{
+  top: 0;
+  left: 0;
+  position: fixed;
+  pointer-events: none;
+}
 
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 :target > .section-head h2 { color: var(--accent); transition: color .3s; }
 </style>
 </head>
-<body data-theme="light">
+<body data-theme="light" back="true">
 
 <!-- ===================== Header ===================== -->
 <header class="app-header" data-screen-label="Header">
@@ -1306,6 +1313,7 @@ footer {
 
 <main>
 
+  <canvas id="background"></canvas>
   <!-- ===================== Class Tabs ===================== -->
   <div class="class-tabs" id="class-tabs" role="tablist" aria-label="クラス切替">
     <!-- 動的生成 -->
@@ -1636,6 +1644,82 @@ footer {
     else{
       isrendertoday = false;
     };
+  let time;
+
+  /////背景の処理/////
+  let pieceback = [];
+  let ScrWidth;
+  let ScrHeight;
+  let countForBG = 0;
+  const backgroundcanvas = document.getElementById("background");
+  const ctx = backgroundcanvas.getContext("2d");
+  class back{
+    constructor(x,dir,size){
+      this.speed = Math.random() + 0.8;
+      this.dir = dir;
+      this.x = x;
+      this.y = 0;
+      this.size = size * this.speed;
+      this.live = true;
+    }
+    proto(spt){
+      ctx.translate(this.x + (picturebackfall.width * this.size / 2),this.y - (picturebackfall.height * this.size / 2));
+      ctx.rotate(this.dir);
+      ctx.drawImage(picturebackfall,0,0,(picturebackfall.width * this.size),(picturebackfall.height * this.size));
+      ctx.rotate(-this.dir);
+      ctx.translate(-(picturebackfall.width * this.size / 2) - this.x,(picturebackfall.height * this.size / 2) - this.y);
+      //次回用動作
+      this.y += (this.speed * 0.5 * spt);
+      this.x += 0.05 * spt;
+      this.dir += (0.0001 * Math.PI * spt);
+      //範囲外だったら消す
+      if(this.y > ScrHeight)this.live = false;
+    }
+  }
+  let picturebackfall = new Image();
+  picturebackfall.src = "images/snow.png";
+  function background(t){
+    let spendtime = t - time;
+    ScrWidth = window.innerWidth;
+    ScrHeight = window.innerHeight;
+    backgroundcanvas.width = ScrWidth;
+    backgroundcanvas.height = ScrHeight;
+    //破壊
+    ctx.clearRect(0,0,ScrWidth,ScrHeight);
+    if(document.body.getAttribute("back") == "true"){
+    //生成
+    if(countForBG % 1 == 0){
+      pieceback.push(new back(Math.floor(Math.random() * (ScrWidth + 20) - 20),(Math.random() * 3.14),0.007));
+    }
+    //処理
+    let delloc = [];
+    pieceback.forEach(obj => {
+      obj.proto(spendtime);
+      if(obj.live == false || document.body.getAttribute("data-theme") == "light"){
+        delloc.push(pieceback.indexOf(obj));
+      }
+    });
+    delloc.sort((a,b) => a - b);
+    for(let i = 0;i < delloc.length;i++){
+      pieceback.splice(delloc[i] - i,1);
+    }
+    delloc.splice(0,delloc.length);
+    }
+    else{
+      pieceback.splice(0,pieceback.length);
+    }
+    //終わり
+    time = t;
+    countForBG++;
+    requestAnimationFrame(background);
+  }
+  picturebackfall.decode().then(() => {
+    requestAnimationFrame((t) => {
+      time = t;
+      requestAnimationFrame(background);
+    })
+  })
+  /////背景の処理/////
 
   function DataLoadFromDB(){
     let allfetch = [];
@@ -2480,6 +2564,7 @@ footer {
   const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
     "myClass": "B",
     "dark": false,
+    "back": true,
     "showTabbar": true
   }/*EDITMODE-END*/;
 
@@ -2494,6 +2579,7 @@ footer {
 
   function apply() {
     document.body.setAttribute('data-theme', state.dark ? 'dark' : 'light');
+    document.body.setAttribute("back", state.back ? "true":"false");
     document.getElementById('tabbar').style.display = state.showTabbar ? '' : 'none';
     document.body.style.paddingBottom = state.showTabbar ? '' : '32px';
     if (window.__2g && window.__2g.getMyClass && window.__2g.getMyClass() !== state.myClass) {
@@ -2532,6 +2618,13 @@ footer {
               </label>
             </div>
             <div class="tw-row">
+              <label>背景の演出</label>
+              <label class="tw-toggle">
+                <input type="checkbox" id="tw-back" ${state.back ? 'checked':''}>
+                <span></span>
+              </label>
+            </div>
+            <div class="tw-row">
               <label>下部タブバーを表示</label>
               <label class="tw-toggle">
                 <input type="checkbox" id="tw-tab" ${state.showTabbar ? 'checked':''}>
@@ -2557,6 +2650,7 @@ footer {
       };
     });
     root.querySelector('#tw-dark').onchange = e => { state.dark = e.target.checked; save(); apply(); };
+    root.querySelector('#tw-back').onchange = e => { state.back = e.target.checked; save(); apply(); };
     root.querySelector('#tw-tab').onchange = e => { state.showTabbar = e.target.checked; save(); apply(); };
   }
   function closePanel() { root.innerHTML = ''; }
