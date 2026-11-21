@@ -369,7 +369,7 @@ html, body { margin: 0; padding: 0; }
 body {
   font-family: var(--font-sans);
   color: var(--ink);
-  background: var(--bg);
+  background: #0f1116;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   padding-bottom: calc(78px + env(safe-area-inset-bottom));
@@ -1295,7 +1295,7 @@ footer {
 :target > .section-head h2 { color: var(--accent); transition: color .3s; }
 </style>
 </head>
-<body data-theme="light" back="true">
+<body data-theme="light" back="false">
 
 <!-- ===================== Header ===================== -->
 <header class="app-header" data-screen-label="Header">
@@ -1635,6 +1635,7 @@ footer {
 <div id="tweaks-root"></div>
 
 <script>
+  document.body.style.background = "var(--bg)";
   let isrendertoday = true;
   let scheduledate = [undefined,undefined,undefined];
   let DatasFromDB = [undefined,undefined,undefined,undefined,undefined];
@@ -1863,10 +1864,9 @@ footer {
     })
     })
   })}
-  DataLoadFromDB().then(() => {
+
 
 ///ここまで特殊処理///
-
 /* ==================================================================
    2Gサイト レンダリング=非同期処理
    ==================================================================
@@ -1950,9 +1950,15 @@ footer {
       showDate = new Date();
       showDate.setFullYear(Number(scheduledate[0]),Number(scheduledate[1]) - 1,Number(scheduledate[2]));
       const youbi = ["日","月","火","水","木","金","土"];
-      prefix = String(showDate.getMonth() + 1) + "月" + String(showDate.getDate()) + '日' + youbi[showDate.getDay()] + "曜日" + 'の2';
+      if(notdateflag == true){
+        prefix = "情報なし"
+      }
+      else{
+        prefix = String(showDate.getMonth() + 1) + "月" + String(showDate.getDate()) + '日' + youbi[showDate.getDay()] + "曜日" + 'の2';
+      }
     }
-    $('#today-heading').textContent = prefix + currentClass;
+    if(notdateflag == true)$('#today-heading').textContent = prefix;
+    else $('#today-heading').textContent = prefix + currentClass;
       const y = now2.getFullYear();
       const m = String(now2.getMonth() + 1).padStart(2,'0');
       const d = String(now2.getDate()).padStart(2,'0');
@@ -2013,12 +2019,7 @@ footer {
     };
   }
   renderHero();
-
-  function plusclus(curclass,n,m){
-
-
-
-  }
+  DataLoadFromDB().then(() => {renderHero()});
 
   // ---- Countdown
   function renderCountdowns() {
@@ -2681,7 +2682,6 @@ footer {
   function closePanel() { root.innerHTML = ''; }
   document.getElementById('tweaks-btn').onclick = openPanel;
 })();
-  });
 </script>
 
 <style>
