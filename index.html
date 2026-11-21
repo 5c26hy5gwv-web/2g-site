@@ -1669,7 +1669,7 @@ footer {
       ctx.rotate(-this.dir);
       ctx.translate(-(picturebackfall.width * this.size / 2) - this.x,(picturebackfall.height * this.size / 2) - this.y);
       //次回用動作
-      this.y += (this.speed * 0.5 * spt);
+      this.y += (this.speed * 0.5 * (ScrHeight / 2000) * spt);
       this.x += 0.05 * spt;
       this.dir += (0.0001 * Math.PI * spt);
       //範囲外だったら消す
@@ -1689,7 +1689,11 @@ footer {
     if(document.body.getAttribute("back") == "true"){
     //生成
     if(countForBG % 1 == 0){
-      pieceback.push(new back(Math.floor(Math.random() * (ScrWidth + 20) - 20),(Math.random() * 3.14),0.007));
+      let i = 0;
+      do{
+        pieceback.push(new back(Math.floor(Math.random() * (ScrWidth + 100) - 100),(Math.random() * 3.14),0.007));
+        i++;
+      }while(i < (ScrWidth * ScrHeight / 2000000));
     }
     //処理
     let delloc = [];
